@@ -2,7 +2,7 @@
 
 ### Overview
 
-The goal of this project is to build a Cloud-based personal health management system.
+The goal of this project is to build a Cloud-based personal health management system. Personalized health management system can help patients to track their health related data comfortably, increase prevention, detect risks and make the communication between patient and doctor easier and more efficint.
 
 ### System Description
 
@@ -16,7 +16,7 @@ Server-side application is deployed on a cloud service-based cloud server. The f
 
 On the server side, all data received from the mobile app will be stored into a database indexed by the user’s name, date of birth or etc. The server shall be able to run a data analysis process to show, analyze and detect risk based on user data trend. Server application shall also be able to show a visual representation of user data via graphs or other on a webpage. It will enable doctors to monitor or review patient’s health status, evaluate and make decisions based on that health information.
 
-### Android mobile app
+### Mobile app
 
 ![Frontend](https://github.com/adkulas/ece651-group-project/blob/Updating-Mission-Statement/frontend.png)
 
