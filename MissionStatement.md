@@ -18,7 +18,7 @@ On the server side, all data received from the mobile app will be stored into a 
 
 ### Mobile app
 
-![Frontend](https://github.com/adkulas/ece651-group-project/blob/Updating-Mission-Statement/frontend_rev2.png)
+![Frontend](https://github.com/adkulas/ece651-group-project/blob/master/frontend_rev2.png)
 
 The Android phone app will provide data input functionalities for this system. It would be able to input blood pressure and heart rate information manually, or input via OCR (optical character recognition) based text, auto reading from an image which is taken by phone camera. Android phone shall collect this blood pressure information – high, low, pulse, store most recent data on the phone and at the same time forward this information to the server and store them on the server permanently. Application shall also be able to visualize user data on a graph within the GUI.
 
