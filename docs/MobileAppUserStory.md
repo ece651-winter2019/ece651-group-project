@@ -20,7 +20,10 @@ As First phase development shall include below functionalities.
 TED
 
 ### Verification Requirement
+Test function shell be implemented before start implement real unit function code
 * Unit Test
+Unit test shall be implemented by JUnit framework
 * Automated GUI Test
+Monkito or Espresso framework shall be used for automated GUI test.
 * Automated Integration Test 
 
