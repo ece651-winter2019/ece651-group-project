@@ -30,7 +30,7 @@ Bocadillo has a single repository for both the `bocadillo` package and its docum
 
 ### Configuring the development environment
 
-All development is done on ubuntu 18.04 LTS. Assuming you have just installed ubuntu fresh, this section will outline the steps to installing dependencies and tools required for development on the project.  
+All development is done on ubuntu 18.04.1 LTS. Assuming you have just installed ubuntu fresh, this section will outline the steps to installing dependencies and tools required for development on the project.  
 
 First update and upgrade the system
 
