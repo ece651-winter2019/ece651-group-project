@@ -88,6 +88,7 @@ alias python="/usr/local/bin/python3.7"
 
 Remove the build folder if you like:
 ```console
+cd ~
 rm -r ~/tmp
 ```
 
