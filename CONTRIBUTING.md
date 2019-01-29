@@ -50,7 +50,7 @@ First download the source code
 ```console
 cd ~
 mkdir tmp && cd tmp
-wget https://www.python.org/ftp/python/3.7.2/Python-3.7.2.tgz
+wget https://www.python.org/ftp/python/3.7.2/Python-3.7.2.tar.xz
 tar xvf Python-3.7.2.tar.xz
 cd Python-3.7.2
 ```
