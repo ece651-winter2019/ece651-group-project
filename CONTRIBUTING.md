@@ -102,6 +102,7 @@ This does user installation and puts pipenv in your `/home/USER_NAME/.local/` fo
 
 ```bash
 echo "\nexport PATH=~/.local/bin:\$PATH" >> ~/.bashrc
+source ~/.bashrc
 ```
 Now clone the repo in a location of your choice, then install all the required python packages using pipenv
 ```console
