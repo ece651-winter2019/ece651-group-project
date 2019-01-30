@@ -40,4 +40,15 @@ Getting Started
 
 - Run your project.
 
-    env/bin/pserve development.ini
+    env/bin/pserve development.ini --reload
+    
+```bash
+cd back_end
+python3.7 -m venv env
+env/bin/pip install --upgrade pip setuptools
+env/bin/pip install -e ".[testing]"
+env/bin/alembic -c development.ini revision --autogenerate -m "init"
+env/bin/alembic -c development.ini upgrade head
+env/bin/initialize_back_end_db development.ini
+env/bin/pserve development.ini --reload
+```
