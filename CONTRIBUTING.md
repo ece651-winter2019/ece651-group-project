@@ -28,43 +28,108 @@ This step is important because there may be aspects you didn't think about, or t
 
 Bocadillo has a single repository for both the `bocadillo` package and its documentation.
 
-### Setting up the repo
+### Configuring the development environment
+
+All development is done on ubuntu 18.04.1 LTS. Assuming you have just installed ubuntu fresh, this section will outline the steps to installing dependencies and tools required for development on the project.  
+
+First update and upgrade the system
+
+```console
+sudo apt-get update
+sudo apt-get upgrade
+```
+
+install required dependencies from apt
+
+```console
+sudo apt-get install --assume-yes make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev  libncursesw5-dev xz-utils tk-dev git mercurial
+```
+Ubuntu comes with python 3.6 but development will be done using the latest python version 3.7.2. In order to get this version of python it can be built from source using the following commands  
+
+First download the source code
+```console
+cd ~
+mkdir tmp && cd tmp
+wget https://www.python.org/ftp/python/3.7.2/Python-3.7.2.tar.xz
+tar xvf Python-3.7.2.tar.xz
+cd Python-3.7.2
+```
+
+prepare the build
+```console
+./configure --enable-optimizations --with-ensurepip=install
+```
+
+Next build the python programs using make (the -j options allows the build to be done in parallel)
+```console
+make -j 8
+```
+Then, you’ll want to install your new version of Python. You’ll use the altinstall target here in order to not overwrite the system’s version of Python. Since you’re installing Python into /usr/local/bin, you’ll need to run as root:
+
+```console
+sudo make altinstall
+```
+
+Verify the install. The python interpreter should have been installed into /usr/local/bin
+```console
+/usr/local/bin/python3.7 --version
+```
+
+You should be able to simply use
+```console
+python3.7
+```
+If this does not find the correct interpreter, you make need to add '/usr/local/bin' to the PATH environment variable.  
+
+Or you could simply add an alias to your .bashrc file
+```
+alias python="/usr/local/bin/python3.7"
+```
+
+Remove the build folder if you like:
+```console
+cd ~
+rm -r ~/tmp
+```
+
+### python dependencies
+
+Project dependencies are managed through [Pipenv]. You should install it if you haven't already:
+
+```console
+python -m pip install --user pipenv
+```
+This does user installation and puts pipenv in your `/home/USER_NAME/.local/` folder. This needs to be added to you PATH environment variable to continue
+
+```bash
+echo "\nexport PATH=~/.local/bin:\$PATH" >> ~/.bashrc
+source ~/.bashrc
+```
+Now clone the repo in a location of your choice, then install all the required python packages using pipenv
+```console
+git clone https://github.com/adkulas/ece651-group-project.git
+cd ece651-group-project
+pipenv install --dev
+```
+
+You should now have a virutal environment with all depencies installed. To activate the virutal environment simply use:
+```console
+pipenv shell
+```
+
+
+### Setting up for contribution
 
 Here's how to get your copy of the repo ready for development:
 
-- Fork the `bocadilloproject/bocadillo` repo.
-- Clone the repo on your computer: `git clone https://github.com/<your-username>/bocadillo`.
+- Clone the `ece651-group-project` repo.
+- Clone the repo on your computer: `git clone https://github.com/adkulas/ece651-group-project.git`.
 - Checkout the `master` branch and grab its latest version: `git pull origin master`.
-- Install the project (see installation steps below).
+- Install the project (see installation steps above).
 - Create a branch (e.g. `fix/some-bug`) and work on it.
 - Push to your remote: `git push origin fix/some-bug`.
 - [Open a pull request] and follow the [PR process](#pull-request-process) below.
 
-### Installing Bocadillo for development
-
-#### Installing the `bocadillo` package
-
-In order to install Bocadillo for development, you'll need **Python 3.6+**.
-
-Project dependencies are managed through [Pipenv]. You should install it if you haven't already:
-
-```bash
-pip install pipenv
-```
-
-Then run the following in order to install dependencies:
-
-```bash
-pipenv install --dev
-```
-
-To verify Python dependencies have been correctly installed, first [run the tests](#running-tests). You can also fiddle with Bocadillo in the interpreter:
-
-```python
->>> import bocadillo
->>> bocadillo.__version__
-'0.10.1'
-```
 
 #### Installing the documentation packages
 

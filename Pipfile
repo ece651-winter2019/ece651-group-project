@@ -1,0 +1,23 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+coverage = "*"
+pytest = "*"
+wily = "*"
+black = "*"
+pytest-cov = "*"
+
+[packages]
+sqlalchemy = "*"
+requests = "*"
+ramses = "*"
+cryptacular = {editable = true,hg = "https://bitbucket.org/dholth/cryptacular",ref = "cb96fb3"}
+
+[requires]
+python_version = "3.7"
+
+[pipenv]
+allow_prereleases = true
