@@ -119,9 +119,9 @@ cd ece651-group-project
 pipenv install --dev
 ```
 
-You should now have a virutal environment with all depencies installed. To activate the virutal environment simply use:
+You should now have a virtual environment with all dependencies installed. To activate the virtual environment simply use:
 ```console
-pipenv shell
+pipenv shellpipenv 
 ```
 
 
