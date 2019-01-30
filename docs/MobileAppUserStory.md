@@ -16,9 +16,6 @@ As First phase development shall include below functionalities.
 * USer data show in a plot
 * OCR based automates User data input
 
-### Quality Requeirment
-TED
-
 ### Verification Requirement
 Test function shell be implemented before start implement real unit function code
 * Unit Test
