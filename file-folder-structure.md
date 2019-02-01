@@ -4,16 +4,23 @@ A nice starting point is suggested [here](https://github.com/kriasoft/Folder-Str
 
 Example
 
-├── build                   # Compiled files (alternatively `dist`)
-
-├── docs                    # Documentation files (alternatively `doc`)
-
-├── src                     # Source files (alternatively `lib` or `app`)
-
-├── test                    # Automated tests (alternatively `spec` or `tests`)
-
-├── tools                   # Tools and utilities
-
-├── LICENSE
-
-└── README.md
+* build # Compiled files (alternatively `dist`)
+  * database
+  * backend
+  * frontend
+  * mobileapp
+  * ci
+* docs # Documentation files (alternatively `doc`)
+  * softdev lifecycle
+    * planning
+    * requirements
+    * design
+    * implementation
+    * testing
+    * deployment
+    * maintenance
+* src # Source files (alternatively `lib` or `app`)
+* test # Automated tests (alternatively `spec` or `tests`)
+* tools # Tools and utilities
+* LICENSE
+* README.md
