@@ -101,10 +101,17 @@ python -m pip install --user pipenv
 ```
 This does user installation and puts pipenv in your `/home/USER_NAME/.local/` folder. This needs to be added to you PATH environment variable to continue
 
+Backup bashrc file
 ```bash
-echo "\nexport PATH=~/.local/bin:\$PATH" >> ~/.bashrc
+cp ~/.bashrc ~/.bashrc.old
+```
+Modify path and reload bashrc
+```bash
+echo "export PATH=~/.local/bin:\$PATH" >> ~/.bashrc
 source ~/.bashrc
 ```
+Confirm the line has been added to the end of the bashrc file with tail `tail ~/.bashrc`. This should return text containing the line `export PATH=~/.local/bin:$PATH`
+
 Now clone the repo in a location of your choice, then install all the required python packages using pipenv
 ```console
 git clone https://github.com/adkulas/ece651-group-project.git
