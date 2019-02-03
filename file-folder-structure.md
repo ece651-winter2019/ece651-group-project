@@ -7,11 +7,11 @@ Example
 * build # Compiled files (alternatively `dist`)
   * database
   * backend
-  * frontend
+  * webapp
   * mobileapp
   * ci
 * docs # Documentation files (alternatively `doc`)
-  * softdev lifecycle
+  * softdev-lifecycle
     * planning
     * requirements
     * design
@@ -19,8 +19,23 @@ Example
     * testing
     * deployment
     * maintenance
+  * database
+  * backend
+  * webapp
+  * mobileapp
+  * ci
 * src # Source files (alternatively `lib` or `app`)
+  * database
+  * backend
+  * webapp
+  * mobileapp
+  * ci
 * test # Automated tests (alternatively `spec` or `tests`)
+  * database
+  * backend
+  * webapp
+  * mobileapp
+  * ci
 * tools # Tools and utilities
 * LICENSE
 * README.md
