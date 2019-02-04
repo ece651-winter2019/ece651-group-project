@@ -20,6 +20,7 @@
 3. Creates an account for a doctor.
 4. Deletes a patient account.
 5. Deletes a doctor account.
+6. Grants appropriate level of privileges to patient and doctor accounts.
 
 ### Doctor
 
