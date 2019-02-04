@@ -1,7 +1,7 @@
 # Description of users' roles and basic user stories
 
 ## Basic set of users
-* Pacient
+* Patient
 * Doctor
 * System administrator
 
