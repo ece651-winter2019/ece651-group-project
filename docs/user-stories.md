@@ -26,11 +26,10 @@
 1. Log into the system through a web app using proper credentials.
 2. Look for one of the assigned patient’s by his/her last name.
 3. For a particular patient, see the details of his/her last measure.
-4. For a particular patient, see summary statistics of the last week including a plot.
-5. For a particular patient, see summary statistics of the last month including a plot.
-6. See the rank of all the assigned patients sorted by their last measure.
-7. See the rank of all the assigned patients sorted by their average measure over last week.
-8. See the rank of all the assigned patients sorted by their average measure over last month.
+4. For a particular patient, see summary statistics over a period of time chosen by doctor (e.g. dd/mm/yyyy to dd/mm/yyyy)
+5. See the rank of all the assigned patients sorted by their last measure.
+6. See the rank of all the assigned patients sorted by their average measure over last week.
+7. See the rank of all the assigned patients sorted by their average measure over last month.
 
 ### Patient
 
