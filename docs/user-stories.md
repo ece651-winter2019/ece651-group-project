@@ -35,8 +35,7 @@
 ### Patient
 
 1. Log into the system through a mobile app using proper credentials.
-2. Write and upload a measure of his/her blood pressure.
-3. Delete a previous measure of his/her blood pressure.
-4. See the details of the last measure.
-5. See summary statistics of the last week including a plot.
-6. See summary statistics of the last month including a plot.
+2. Store measurement of his/her blood pressure in the database.
+3. See the details of the last measure.
+4. See summary statistics of the last week including a plot.
+5. See summary statistics of the last month including a plot.
