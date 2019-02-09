@@ -9,6 +9,8 @@ pytest = "*"
 wily = "*"
 black = "*"
 pytest-cov = "*"
+flake8 = "*"
+cookiecutter = "*"
 
 [packages]
 sqlalchemy = "*"

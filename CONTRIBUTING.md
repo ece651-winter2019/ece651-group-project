@@ -92,6 +92,67 @@ cd ~
 rm -r ~/tmp
 ```
 
+### Install Docker
+Deployment and testing will be done using docker containers. Please follow the steps below to install docker on your machine.  
+
+#### SET UP THE REPOSITORY
+
+1. Update the apt package index:
+```bash
+sudo apt-get update
+```
+
+2. Install packages to allow apt to use a repository over HTTPS:
+```bash
+sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg-agent \
+    software-properties-common
+```
+3. Add Docker’s official GPG key:
+
+```bash
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+```
+
+4. Verify that you now have the key with the fingerprint `9DC8 5822 9FC7 DD38 854A E2D8 8D81 803C 0EBF CD88`, by searching for the last 8 characters of the fingerprint.
+```bash
+sudo apt-key fingerprint 0EBFCD88
+```  
+
+```console
+pub   rsa4096 2017-02-22 [SCEA]
+      9DC8 5822 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88
+uid           [ unknown] Docker Release (CE deb) <docker@docker.com>
+sub   rsa4096 2017-02-22 [S]
+```
+
+Use the following command to set up the stable repository. To add the nightly or test repository, add the word nightly or test (or both) after the word stable in the commands below. Learn about nightly and test channels.
+
+Note: The lsb_release -cs sub-command below returns the name of your Ubuntu distribution, such as xenial. Sometimes, in a distribution like Linux Mint, you might need to change $(lsb_release -cs) to your parent Ubuntu distribution. For example, if you are using Linux Mint Tessa, you could use bionic. Docker does not offer any guarantees on untested and unsupported Ubuntu distributions.
+```bash
+sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+```
+#### INSTALL DOCKER CE
+1. Update the apt package index.
+```bash
+sudo apt-get update
+```
+
+2. Install the latest version of Docker CE and containerd, or go to the next step to install a specific version:
+```bash
+sudo apt-get install docker-ce docker-ce-cli containerd.io
+```
+3. Verify that Docker CE is installed correctly by running the hello-world image.
+```bash
+sudo docker run hello-world
+```
+
 ### python dependencies
 
 Project dependencies are managed through [Pipenv]. You should install it if you haven't already:
@@ -119,9 +180,9 @@ cd ece651-group-project
 pipenv install --dev
 ```
 
-You should now have a virutal environment with all depencies installed. To activate the virutal environment simply use:
+You should now have a virtual environment with all dependencies installed. To activate the virtual environment simply use:
 ```console
-pipenv shell
+pipenv shellpipenv 
 ```
 
 
