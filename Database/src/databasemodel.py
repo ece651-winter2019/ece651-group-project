@@ -43,7 +43,6 @@ class Doctor(Base):
 class Patient(Base):
     __tablename__ = 'patients'
     
-    patient_id = Column(Integer, primary_key=True, nullable=False)
     doctor_id = Column( Integer, ForeignKey("doctors.doctor_id"), nullable=False)
     first_name = Column(String(20), nullable=False)
     last_name = Column( String(20), nullable=False)
@@ -57,11 +56,12 @@ class Patient(Base):
     state = Column( String(2), nullable=False)
     postal_code = Column( String(6), nullable=False)
     country = Column(String(50), nullable=False)
-    
+    patient_id = Column(Integer, primary_key=True, nullable=False)
+    # Defining a one to one relation (Patients - emergency contact)
+    emergeny_C = relationship("EmergencyContact",uselist=False, back_populates="patient")
     # Defining a one to one relation
     doctors = relationship("Doctor", foreign_keys=doctor_id)
     health_stats = relationship("Health_stats",uselist=False, back_populates="patient")
-    #emergeny_C = relationship("EmergencyContact",uselist=False, back_populates="patient")
     #  emergeny_C = relationship("EmergencyContact", back_populates="patient")
     logins = relationship("PatientLogin")
     
@@ -87,13 +87,16 @@ class Health_stats(Base):
 class EmergencyContact(Base):
     __tablename__ = 'emergency_contacts'
     
+    # Defining a one to one relation
+    patient = relationship("Patient", back_populates = "emergeny_C", uselist=False)
+    
     contact_id = Column(Integer, primary_key=True)
     patient_id = Column(Integer,ForeignKey("patients.patient_id"),nullable=False)
     contact_name = Column(String(20), nullable=False)
     relationship = Column(String(10), nullable=False)
     phone = Column(Integer, nullable=False)
-# Defining a one to one relation
-#   patient = relationship("Patient", back_populates = "emergeny_C", uselist=False)
+
+
 
 
 class PatientLogin(Base):
@@ -168,6 +171,5 @@ print(mapp)
 #session.commit()
 #
 #session.close()
-
 
 
