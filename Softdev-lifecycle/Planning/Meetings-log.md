@@ -37,6 +37,8 @@ The team works tohether on a more detailed version of the system architecture.
 
 Additionaly, the team decides on the specifications of the minimum viable product and settles some dates.
 
+![Design sketch of system architecture](Images/design-sketch.jpg)
+
 ### Saturday, February 2th
 
 Adam, Ammar, Gabe, and Samuel report advances on the database and backend components.
