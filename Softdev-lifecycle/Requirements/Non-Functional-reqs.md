@@ -1,0 +1,3 @@
+# Non functional requirements
+
+The platform must handle up to 50 users interacting simultaneously with the system through the WebApp...

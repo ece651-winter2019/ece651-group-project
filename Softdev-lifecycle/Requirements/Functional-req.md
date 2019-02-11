@@ -1,0 +1,3 @@
+# Functional requirements
+
+Patient launchs the MobileApp...
