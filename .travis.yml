@@ -1,7 +1,9 @@
 language: python
 before_install:
-  - python -m pip install --upgrade pip && pip install -r requirements.txt
   - python3.7 -m venv env
-  - pip install --upgrade 
-  - pip setuptools
-  - pip install -e ".[testing]"
+  - env/bin/pip install --upgrade pip setuptools
+  - env/bin/pip install -e ".[testing]"
+  - env/bin/alembic -c development.ini revision --autogenerate -m "init"
+  - env/bin/alembic -c development.ini upgrade head
+  - env/bin/initialize_back_end_db development.ini
+  - env/bin/pserve development.ini --reload"
