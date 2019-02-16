@@ -12,7 +12,6 @@ python:
   - "3.7-dev"  # 3.7 development branch
 # command to install dependencies
 install:
-  - pip install -r requirements.txt
   - python3.7 -m venv env
   - pip install --upgrade pip setuptools
   - pip install -e ".[testing]"
