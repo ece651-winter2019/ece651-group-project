@@ -1,4 +1,5 @@
 language: python
+before_script: cd back_end
 python:
 #   - "2.6"
 #   - "2.7"
