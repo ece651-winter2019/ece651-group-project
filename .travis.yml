@@ -1,5 +1,5 @@
 language: python
-before_script: cd back_end
+before_install: cd back_end
 python:
 #   - "2.6"
 #   - "2.7"
@@ -14,7 +14,6 @@ python:
 install:
   - python3.7 -m venv env
   - pip install --upgrade pip setuptools
-  - pip install -e ".[testing]"
 # command to run tests
 script:
   - pytest
