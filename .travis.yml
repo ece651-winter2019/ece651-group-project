@@ -22,7 +22,7 @@ matrix:
         - android-wait-for-emulator
         - adb shell input keyevent 82 &
 
-      script: bash ./gradlew :app:assembleDebug connectedAndroidTest
+      script: bash gradlew :app:assembleDebug connectedAndroidTest
 
       
     - language: python
