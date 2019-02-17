@@ -6,7 +6,11 @@ from sqlalchemy import *
 from sqlalchemy.dialects.mysql import LONGTEXT
 
 
+<<<<<<< HEAD
 engine = create_engine('mysql+mysqldb://bd3121794ba1e4:6d936518@us-cdbr-iron-east-03.cleardb.net/heroku_e0771598287fecc')
+=======
+engine = create_engine('mysql+mysqldb://root:macbookpro@localhost/ece651')
+>>>>>>> 148ba2c358a7650c6d696b400f7dc3c08baa6193
 
 
 connection = engine.connect()
@@ -63,8 +67,13 @@ class Patient(Base):
     doctors = relationship("Doctor", foreign_keys=doctor_id)
     health_stats = relationship("Health_stats",uselist=False, back_populates="patient")
     #  emergeny_C = relationship("EmergencyContact", back_populates="patient")
+<<<<<<< HEAD
 #    logins = relationship("PatientLogin")
 
+=======
+    logins = relationship("PatientLogin")
+    
+>>>>>>> 148ba2c358a7650c6d696b400f7dc3c08baa6193
     def __repr__(self):
         return "<User(First name='%s', Last Name='%s', phone No='%s')>" % (
                                                                            self.first_name, self.last_name, self.phone_no)
@@ -99,6 +108,7 @@ class EmergencyContact(Base):
 
 
 
+<<<<<<< HEAD
 #class PatientLogin(Base):
 #    __tablename__ = 'patient_logins'
 #
@@ -106,6 +116,15 @@ class EmergencyContact(Base):
 #    email = Column(String(20) , ForeignKey("patients.email"), nullable=False)
 #    created_on = Column(DateTime(), default=datetime.now)
 #    status = Column(Integer, nullable=False)
+=======
+class PatientLogin(Base):
+    __tablename__ = 'patient_logins'
+    
+    login_id = Column(Integer, primary_key=True, nullable=False)
+    email = Column(String(20) , ForeignKey("patients.email"), nullable=False)
+    created_on = Column(DateTime(), default=datetime.now)
+    status = Column(Integer, nullable=False)
+>>>>>>> 148ba2c358a7650c6d696b400f7dc3c08baa6193
 #mysql_engine='InnoDB'
 
 

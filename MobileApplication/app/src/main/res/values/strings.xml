@@ -14,4 +14,8 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing username
         completions."
     </string>
+    <string name="fetch_text">Fetch</string>
+    <string name="clear_text">Clear</string>
+    <string name="connection_error">Connection error.</string>
+    <string name="fetch_cancelled">Fetch cancelled.</string>
 </resources>

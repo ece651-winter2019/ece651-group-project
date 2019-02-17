@@ -38,11 +38,11 @@ public class LoginActivityTest {
 
     @Test
     public void user_login() throws InterruptedException {
-        onView(withId(R.id.userName)).perform(typeText("Hello"));
-        onView(withId(R.id.password)).perform(typeText("World"));
+        onView(withId(R.id.userName)).perform(typeText("tliu"));
+        onView(withId(R.id.password)).perform(typeText("tlkwonca"));
         onView(withId(R.id.systolic)).perform(typeText("120"));
         onView(withId(R.id.diastolic)).perform(typeText("75"));
-        onView(withId(R.id.sign_in_button)).perform(click()).check(matches(isClickable()));
+        onView(withId(R.id.sign_in_button)).perform(click());
     }
 
 
