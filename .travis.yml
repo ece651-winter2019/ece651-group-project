@@ -18,3 +18,24 @@ install:
 # command to run tests
 script:
   - pytest
+
+before_install: cd back_end
+language: python
+python:
+#   - "2.6"
+#   - "2.7"
+#   - "3.3"
+#   - "3.4"
+#   - "3.5"
+#   - "3.5-dev"  # 3.5 development branch
+#   - "3.6"
+#   - "3.6-dev"  # 3.6 development branch
+  - "3.7-dev"  # 3.7 development branch
+# command to install dependencies
+install:
+  - python3.7 -m venv env
+  - pip install --upgrade pip setuptools
+  - pip install -e ".[testing]"
+# command to run tests
+script:
+  - pytest
