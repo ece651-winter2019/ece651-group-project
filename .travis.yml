@@ -22,7 +22,7 @@ matrix:
         - android-wait-for-emulator
         - adb shell input keyevent 82 &
 
-      script: ./gradlew connectedAndroidTest
+      script: bash gradlew connectedAndroidTest
 
     before_install: cd back_end
 
