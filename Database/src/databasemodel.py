@@ -6,7 +6,7 @@ from sqlalchemy import *
 from sqlalchemy.dialects.mysql import LONGTEXT
 
 
-engine = create_engine('mysql+mysqldb://root:macbookpro@localhost/ece651')
+engine = create_engine('mysql+mysqldb://bd3121794ba1e4:6d936518@us-cdbr-iron-east-03.cleardb.net/heroku_e0771598287fecc')
 
 
 connection = engine.connect()
@@ -63,8 +63,8 @@ class Patient(Base):
     doctors = relationship("Doctor", foreign_keys=doctor_id)
     health_stats = relationship("Health_stats",uselist=False, back_populates="patient")
     #  emergeny_C = relationship("EmergencyContact", back_populates="patient")
-    logins = relationship("PatientLogin")
-    
+#    logins = relationship("PatientLogin")
+
     def __repr__(self):
         return "<User(First name='%s', Last Name='%s', phone No='%s')>" % (
                                                                            self.first_name, self.last_name, self.phone_no)
@@ -99,13 +99,13 @@ class EmergencyContact(Base):
 
 
 
-class PatientLogin(Base):
-    __tablename__ = 'patient_logins'
-    
-    login_id = Column(Integer, primary_key=True, nullable=False)
-    email = Column(String(20) , ForeignKey("patients.email"), nullable=False)
-    created_on = Column(DateTime(), default=datetime.now)
-    status = Column(Integer, nullable=False)
+#class PatientLogin(Base):
+#    __tablename__ = 'patient_logins'
+#
+#    login_id = Column(Integer, primary_key=True, nullable=False)
+#    email = Column(String(20) , ForeignKey("patients.email"), nullable=False)
+#    created_on = Column(DateTime(), default=datetime.now)
+#    status = Column(Integer, nullable=False)
 #mysql_engine='InnoDB'
 
 
