@@ -1,5 +1,6 @@
 matrix:
   include:
+    before_install: cd MobileApplication
     - language: android
       jdk: oraclejdk8
       sudo: false
@@ -23,7 +24,7 @@ matrix:
 
       script: ./gradlew connectedAndroidTest
 
-      before_install: cd back_end
+    before_install: cd back_end
 
     - language: python
       python:
