@@ -44,6 +44,6 @@ matrix:
         - pip install -e ".[testing]"
       # command to run tests
       script:
-        - pytest
+        - pytest 
 
 
