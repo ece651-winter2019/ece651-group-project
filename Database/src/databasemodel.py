@@ -45,6 +45,7 @@ class Doctor(Base):
 class Patient(Base):
     __tablename__ = 'patients'
     
+    patient_id = Column(Integer, primary_key=True, nullable=False)
     doctor_id = Column( Integer, ForeignKey("doctors.doctor_id"), nullable=False)
     first_name = Column(String(20), nullable=False)
     last_name = Column( String(20), nullable=False)
@@ -58,7 +59,6 @@ class Patient(Base):
     state = Column( String(2), nullable=False)
     postal_code = Column( String(6), nullable=False)
     country = Column(String(50), nullable=False)
-    patient_id = Column(Integer, primary_key=True, nullable=False)
     # Defining a one to one relation (Patients - emergency contact)
     emergeny_C = relationship("EmergencyContact",uselist=False, back_populates="patient")
     # Defining a one to one relation
@@ -98,9 +98,10 @@ class EmergencyContact(Base):
     # Defining a one to one relation
     patient = relationship("Patient", back_populates = "emergeny_C", uselist=False)
     
-    contact_id = Column(Integer, primary_key=True)
-    patient_id = Column(Integer,ForeignKey("patients.patient_id"),nullable=False)
-    contact_name = Column(String(20), nullable=False)
+#    contact_id = Column(Integer, primary_key=True)
+    patient_id = Column(Integer,ForeignKey("patients.patient_id"), primary_key=True,nullable=False)
+    contact_firstname = Column(String(20), nullable=False)
+    contact_lastname = Column(String(20), nullable=False)
     relationship = Column(String(10), nullable=False)
     phone = Column(Integer, nullable=False)
 
@@ -149,41 +150,6 @@ print(mapp)
 
 
 
-#session = Session()
-#d = Doctor()
-#d.doctor_id = 12
-#d.first_name = "fdg"
-#d.last_name = "rrfe"
-#d.email = "ercwel"
-#d.phone_no = 232
-#d.st = "258B sunview st"
-#d.city = "waterloo"
-#d.state= "ON"
-#d.postal_code = "N2L0H7"
-#d.country = "Canada"
-#
-#session.add(d)
-#
-#p = Patient()
-#p.patient_id = 0
-#p.doctor_id = 12
-#p.first_name = "Ammar"
-#p.last_name = "Ahmed"
-#p.dob = "09-06-1993"
-#p.sex = "M"
-#p.height = "5,7"
-#p.email = "ammarfa"
-#p.phone_no = 491679
-#p.st = "258B sunview st"
-#p.city = "waterloo"
-#p.state= "ON"
-#p.postal_code = "N2L0H7"
-#p.country = "Canada"
-#
-#session.add(d)
-#session.add(p)
-#session.commit()
-#
-#session.close()
+
 
 
