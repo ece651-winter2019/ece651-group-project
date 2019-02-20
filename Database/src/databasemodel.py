@@ -21,6 +21,36 @@ Base = declarative_base()
 Session = sessionmaker(engine)
 
 
+class LoginCredentials(Base):
+    __tablename__ = 'login_credentials'
+    
+    id = Column(String(20), primary_key=True)
+    password = Column(String(24), primary_key=True)
+
+
+class DoctorLogin(Base):
+    __tablename__ = 'doctor_logins'
+    
+    login_id = Column(Integer, primary_key=True, nullable=False)
+    doctor_id = Column( Integer, ForeignKey("doctors.doctor_id"), nullable=False)
+    created_on = Column(DateTime(), default=datetime.now)
+    status = Column(Integer, nullable=False)
+    
+    doctor = relationship("Doctor", back_populates = "doc_logins", uselist=False)
+
+class PatientLogin(Base):
+    __tablename__ = 'patient_logins'
+    
+    # one to one relationship (patient - login Credential)
+    patient = relationship("Patient", back_populates = "logins", uselist=False)
+    
+    login_id = Column(Integer, primary_key=True, nullable=False)
+    patient_id = Column(Integer,ForeignKey("patients.patient_id"),nullable=False)
+    created_on = Column(DateTime(), default=datetime.now)
+    status = Column(Integer, nullable=False)
+
+
+
 class Doctor(Base):
     __tablename__ = 'doctors'
     
@@ -38,8 +68,8 @@ class Doctor(Base):
     # Given an Doctor object a, we can now access patience associated to doctor using a.patients
     # Defining one to many relation Doctor-patient
     patients = relationship("Patient")
-#patients = relationship("Patient", back_populates="doctor")
-
+    # one to many (Doctor - logins)
+    doc_logins = relationship("DoctorLogin")
 
 
 class Patient(Base):
@@ -61,22 +91,13 @@ class Patient(Base):
     country = Column(String(50), nullable=False)
     # Defining a one to one relation (Patients - emergency contact)
     emergeny_C = relationship("EmergencyContact",uselist=False, back_populates="patient")
-    # Defining a one to one relation
+    # Defining a many to one relation pateint-doctor
     doctors = relationship("Doctor", foreign_keys=doctor_id)
+    # Defining a one to one relation (Patients - health records)
     health_stats = relationship("Health_stats",uselist=False, back_populates="patient")
-    #  emergeny_C = relationship("EmergencyContact", back_populates="patient")
-##################################
-##################################
-#    logins = relationship("PatientLogin") # Still working
-##################################
-##################################
+    #
     logins = relationship("PatientLogin")
-    
-
-    def __repr__(self):
-        return "<User(First name='%s', Last Name='%s', phone No='%s')>" % (
-                                                                           self.first_name, self.last_name, self.phone_no)
-
+    patients = relationship("PatientRecord")
 
 
 class Health_stats(Base):
@@ -98,8 +119,7 @@ class EmergencyContact(Base):
     # Defining a one to one relation
     patient = relationship("Patient", back_populates = "emergeny_C", uselist=False)
     
-#    contact_id = Column(Integer, primary_key=True)
-    patient_id = Column(Integer,ForeignKey("patients.patient_id"), primary_key=True,nullable=False)
+    patient_id = Column(Integer,ForeignKey("patients.patient_id"),primary_key=True,nullable=False)
     contact_firstname = Column(String(20), nullable=False)
     contact_lastname = Column(String(20), nullable=False)
     relationship = Column(String(10), nullable=False)
@@ -107,49 +127,26 @@ class EmergencyContact(Base):
 
 
 
-
-#############################
-############################
-#class PatientLogin(Base):
-#    __tablename__ = 'patient_logins'
-#
-#    login_id = Column(Integer, primary_key=True, nullable=False)
-#    email = Column(String(20) , ForeignKey("patients.email"), nullable=False)
-#    created_on = Column(DateTime(), default=datetime.now)
-#    status = Column(Integer, nullable=False)
-#mysql_engine='InnoDB'
-###############################
-##############################
-
-
-
-
-class DoctorLogin(Base):
-    __tablename__ = 'doctor_logins'
+class PatientRecord(Base):
+    __tablename__ = 'patient_record'
     
-    login_id = Column(Integer, primary_key=True, nullable=False)
-    email = Column(String(20), nullable=False)
-    created_on = Column(DateTime(), default=datetime.now)
-    status = Column(Integer, nullable=False)
-#mysql_engine='InnoDB'
 
-class LoginCredentials(Base):
-    __tablename__ = 'login_credentials'
-    
-    email = Column(String(20), primary_key=True)
-    password = Column(String(24), primary_key=True)
+    record_id = Column(Integer, primary_key=True)
+    patient_id = Column(Integer,ForeignKey("patients.patient_id"),primary_key=True,nullable=False)
+    blodd_pressure = Column(String(20), nullable=False)
+    heart_rate = Column(String(20), nullable=False)
+    weight = Column(String(10), nullable=False)
+    created_on = Column(Integer, nullable=False)
+    # Defining many to one relation
+    patient = relationship("Patient", foreign_keys=patient_id)
 
 
 
-Base.metadata.create_all(engine,  checkfirst=True)
+#Base.metadata.drop_all(engine)
+Base.metadata.create_all(engine, checkfirst=True)
 
-
-mapp = inspect(Doctor)
-print(mapp)
-
-
-
-
+#mapp = inspect(Doctor)
+#print(mapp)
 
 
 
