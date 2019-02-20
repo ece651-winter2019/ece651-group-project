@@ -16,11 +16,11 @@ Session = sessionmaker(engine)
 session = Session()
 
 
-doc = Doctor(doctor_id = 4,
-             first_name = "worst",
-             last_name = "doctor",
-             email = "worst@gmail.com",
-             phone_no = 4389791679,
+doc = Doctor(
+             first_name = "Ammar",
+             last_name = "Ahmed",
+             email = "amme@gmail.com",
+             phone_no = 4323791679,
              st = "32 king st s",
              city = "waterloo",
              state= "ON",
