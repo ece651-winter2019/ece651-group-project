@@ -32,7 +32,7 @@ class DoctorLogin(Base):
     __tablename__ = 'doctor_logins'
     
     login_id = Column(Integer, primary_key=True, nullable=False)
-    doctor_id = Column( Integer, ForeignKey("doctors.doctor_id"), nullable=False)
+    doctor_id = Column( Integer, ForeignKey("doctors.doctor_id", ondelete="CASCADE"), nullable=False)
     created_on = Column(DateTime(), default=datetime.now)
     status = Column(Integer, nullable=False)
     
@@ -45,7 +45,7 @@ class PatientLogin(Base):
     patient = relationship("Patient", back_populates = "logins", uselist=False)
     
     login_id = Column(Integer, primary_key=True, nullable=False)
-    patient_id = Column(Integer,ForeignKey("patients.patient_id"),nullable=False)
+    patient_id = Column(Integer,ForeignKey("patients.patient_id", ondelete="CASCADE"),nullable=False)
     created_on = Column(DateTime(), default=datetime.now)
     status = Column(Integer, nullable=False)
 
@@ -76,7 +76,7 @@ class Patient(Base):
     __tablename__ = 'patients'
     
     patient_id = Column(Integer, primary_key=True, nullable=False)
-    doctor_id = Column( Integer, ForeignKey("doctors.doctor_id"), nullable=False)
+    doctor_id = Column( Integer, ForeignKey("doctors.doctor_id",ondelete="CASCADE"), nullable=False)
     first_name = Column(String(20), nullable=False)
     last_name = Column( String(20), nullable=False)
     dob = Column( String(10), nullable=False)
@@ -104,7 +104,7 @@ class Health_stats(Base):
     __tablename__ = 'health_stats'
     
     record_id = Column(Integer, primary_key=True)
-    patient_id = Column(Integer, ForeignKey("patients.patient_id"),nullable=False)
+    patient_id = Column(Integer, ForeignKey("patients.patient_id",ondelete="CASCADE"),nullable=False)
     blood_pressure = Column(Integer, nullable=False)
     heart_rate = Column(Integer, nullable=False)
     weight = Column(Integer, nullable=False)
@@ -119,7 +119,7 @@ class EmergencyContact(Base):
     # Defining a one to one relation
     patient = relationship("Patient", back_populates = "emergeny_C", uselist=False)
     
-    patient_id = Column(Integer,ForeignKey("patients.patient_id"),primary_key=True,nullable=False)
+    patient_id = Column(Integer,ForeignKey("patients.patient_id",ondelete="CASCADE"),primary_key=True,nullable=False)
     contact_firstname = Column(String(20), nullable=False)
     contact_lastname = Column(String(20), nullable=False)
     relationship = Column(String(10), nullable=False)
@@ -132,7 +132,7 @@ class PatientRecord(Base):
     
 
     record_id = Column(Integer, primary_key=True)
-    patient_id = Column(Integer,ForeignKey("patients.patient_id"),primary_key=True,nullable=False)
+    patient_id = Column(Integer,ForeignKey("patients.patient_id",ondelete="CASCADE"),primary_key=True,nullable=False)
     blodd_pressure = Column(String(20), nullable=False)
     heart_rate = Column(String(20), nullable=False)
     weight = Column(String(10), nullable=False)
