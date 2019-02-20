@@ -143,11 +143,10 @@ class PatientRecord(Base):
 
 
 #Base.metadata.drop_all(engine)
-Base.metadata.create_all(engine)
+Base.metadata.create_all(engine, checkfirst=True)
 
 #mapp = inspect(Doctor)
 #print(mapp)
-
 
 
 
