@@ -12,7 +12,7 @@ matrix:
           - build-tools-26.0.2
           - android-23
           - android-27
-          - sys-img-armeabi-v7a-android-22
+          - sys-img-armeabi-v7a-android-23
           - extra-android-m2repository
 
       before_script:
