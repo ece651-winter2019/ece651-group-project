@@ -21,7 +21,8 @@ matrix:
         - emulator -avd test -no-skin -no-audio -no-window &
         - android-wait-for-emulator
         - adb shell input keyevent 82 &
-        - rm local.properties
+ #       - rm local.properties
+        - ls -la
         - pwd
 
       script: chmod +x ./gradlew && ./gradlew :app:assembleDebug connectedAndroidTest
