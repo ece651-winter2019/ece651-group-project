@@ -9,10 +9,10 @@ matrix:
         components:
           - platform-tools
           - tools
-          - build-tools-24.0.2
+#           - build-tools-24.0.2
           - build-tools-28.0.3
-          - android-22
-          - android-24
+#           - android-22
+#           - android-24
           - android-27
 #          - sys-img-armeabi-v7a-android-22
 #          - sys-img-x86-android-26
@@ -30,8 +30,8 @@ matrix:
 
       script:
         - chmod +x ./gradlew
-        - ./gradlew clean
-        - ./gradlew :app:assembleDebug connectedAndroidTest
+#         - ./gradlew clean
+        - ./gradlew :app:assembleDebug #connectedAndroidTest
 
       
     - language: python
@@ -45,7 +45,7 @@ matrix:
       #   - "3.5-dev"  # 3.5 development branch
       #   - "3.6"
       #   - "3.6-dev"  # 3.6 development branch
-        - "3.7"  # 3.7 development branch
+        - "3.7-dev"  # 3.7 development branch
       # command to install dependencies
       install:
         - python3.7 -m venv env
