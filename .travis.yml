@@ -31,7 +31,7 @@ matrix:
       script:
         - chmod +x ./gradlew
         - ./gradlew clean
-        - ./gradlew :app:assembleDebug #connectedAndroidTest
+        - ./gradlew :app:assembleDebug connectedAndroidTest
 
       
     - language: python
