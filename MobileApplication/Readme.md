@@ -6,7 +6,7 @@
 
 ```bash
 sudo apt-get update
-sudo apt-get install openjdk-8-jre openjdk-8-jdk
+sudo apt-get install openjdk-8-jre openjdk-8-jdk --assume-yes
 sudo snap install android-studio
 ```
   
