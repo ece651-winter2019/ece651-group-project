@@ -36,13 +36,13 @@ class DoctorLogin(Base):
     created_on = Column(DateTime(), default=datetime.now)
     status = Column(Integer, nullable=False)
     
-    doctor = relationship("Doctor", back_populates = "doc_logins", uselist=False)
+    doctor = relationship("Doctor", back_populates=("doc_logins"), cascade="all, delete-orphan",uselist=False, single_parent=True)
 
 class PatientLogin(Base):
     __tablename__ = 'patient_logins'
     
     # one to one relationship (patient - login Credential)
-    patient = relationship("Patient", back_populates = "logins", uselist=False)
+    patient = relationship("Patient", back_populates = "logins",cascade="all, delete-orphan" , uselist=False, single_parent=True)
     
     login_id = Column(Integer, primary_key=True, nullable=False)
     patient_id = Column(Integer,ForeignKey("patients.patient_id", ondelete="CASCADE"),nullable=False)
@@ -67,9 +67,9 @@ class Doctor(Base):
     
     # Given an Doctor object a, we can now access patience associated to doctor using a.patients
     # Defining one to many relation Doctor-patient
-    patients = relationship("Patient")
+    patients = relationship("Patient", cascade="all, delete-orphan")
     # one to many (Doctor - logins)
-    doc_logins = relationship("DoctorLogin")
+    doc_logins = relationship("DoctorLogin", cascade="all, delete-orphan")
 
 
 class Patient(Base):
@@ -90,14 +90,14 @@ class Patient(Base):
     postal_code = Column( String(6), nullable=False)
     country = Column(String(50), nullable=False)
     # Defining a one to one relation (Patients - emergency contact)
-    emergeny_C = relationship("EmergencyContact",uselist=False, back_populates="patient")
+    emergeny_C = relationship("EmergencyContact",uselist=False, back_populates="patient", cascade="all, delete-orphan")
     # Defining a many to one relation pateint-doctor
     doctors = relationship("Doctor", foreign_keys=doctor_id)
     # Defining a one to one relation (Patients - health records)
-    health_stats = relationship("Health_stats",uselist=False, back_populates="patient")
+    health_stats = relationship("Health_stats",uselist=False, back_populates="patient", cascade="all, delete-orphan")
     #
-    logins = relationship("PatientLogin")
-    patients = relationship("PatientRecord")
+    logins = relationship("PatientLogin", cascade="all, delete-orphan")
+    patients = relationship("PatientRecord", cascade="all, delete-orphan")
 
 
 class Health_stats(Base):
@@ -105,7 +105,8 @@ class Health_stats(Base):
     
     record_id = Column(Integer, primary_key=True)
     patient_id = Column(Integer, ForeignKey("patients.patient_id",ondelete="CASCADE"),nullable=False)
-    blood_pressure = Column(Integer, nullable=False)
+    blood_pressure_high = Column(Integer, nullable=False)
+    # blood_pressure_low = Column(Integer, nullable=False)
     heart_rate = Column(Integer, nullable=False)
     weight = Column(Integer, nullable=False)
     updated = Column(DateTime(), default=datetime.now, onupdate=datetime.now)
@@ -138,7 +139,7 @@ class PatientRecord(Base):
     weight = Column(String(10), nullable=False)
     created_on = Column(Integer, nullable=False)
     # Defining many to one relation
-    patient = relationship("Patient", foreign_keys=patient_id)
+    patient = relationship("Patient", foreign_keys=patient_id, cascade="all, delete-orphan", single_parent=True)
 
 
 
