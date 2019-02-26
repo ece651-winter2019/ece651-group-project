@@ -16,10 +16,10 @@ Session = sessionmaker(engine)
 session = Session()
 
 
-patient = Patient(doctor_id = 2,
-                  patient_id = 4,
-             first_name = "ahmed",
-             last_name = "ammar",
+patient = Patient(doctor_id = 12,
+                  patient_id = 1,
+             first_name = "adam",
+             last_name = "kulas",
              dob = "1992-03-23",
              sex = "Male",
              height = "6,0",
@@ -32,7 +32,7 @@ patient = Patient(doctor_id = 2,
             country = "Canada")
 
 emergency_contact = EmergencyContact(
-            patient_id = "4",
+            patient_id = "1",
             contact_firstname = "omar",
             contact_lastname = "ahmed",
             relationship = "brother",
