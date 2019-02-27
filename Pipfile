@@ -15,8 +15,6 @@ cookiecutter = "*"
 [packages]
 sqlalchemy = "*"
 requests = "*"
-ramses = "*"
-cryptacular = {editable = true,hg = "https://bitbucket.org/dholth/cryptacular",ref = "cb96fb3"}
 
 [requires]
 python_version = "3.7"
