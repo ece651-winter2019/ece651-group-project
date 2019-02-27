@@ -1,0 +1,5 @@
+#!/bin/bash
+set -e
+cd back_end
+python setup.py develop
+python runapp.py
