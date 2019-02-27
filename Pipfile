@@ -15,6 +15,7 @@ cookiecutter = "*"
 [packages]
 sqlalchemy = "*"
 requests = "*"
+mysqlclient = "*"
 
 [requires]
 python_version = "3.7"

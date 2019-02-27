@@ -1,5 +1,7 @@
 #!/bin/bash
 set -e
 cd back_end
-python setup.py develop
-python runapp.py
+python -m venv env
+env/bin/pip install --upgrade pip setuptools
+env/bin/pip install -e ".[testing]"
+env/bin/pserve development.ini --reload
