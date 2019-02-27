@@ -21,7 +21,6 @@ requires = [
     'transaction',
     'zope.sqlalchemy',
     'mysqlclient',
-    'mysql-connector-python',
 ]
 
 tests_require = [

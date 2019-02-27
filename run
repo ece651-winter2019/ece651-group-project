@@ -1,7 +1,8 @@
 #!/bin/bash
 set -e
-cd back_end
+cd healthapp_project
 python -m venv env
-env/bin/pip install --upgrade pip setuptools
-env/bin/pip install -e ".[testing]"
-env/bin/pserve development.ini --reload
+env/bin/pip install -r requirements.txt
+source env/bin/activate
+cd healthapp_root
+python manage.py runserver
