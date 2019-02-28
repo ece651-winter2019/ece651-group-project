@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'healthapp_site.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'mysql.connector.django',
 
     }
 }
@@ -124,4 +124,5 @@ STATIC_URL = '/static/'
 # Activate Django-Heroku.
 django_heroku.settings(locals())
 del DATABASES['default']['OPTIONS']['sslmode']
+DATABASES['default']['ENGINE'] = 'mysql.connector.django'
 print(DATABASES['default'])
