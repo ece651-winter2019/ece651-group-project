@@ -9,11 +9,12 @@ Considering lots of user are belong older generation. Application shall be desig
 
 ### Functional Requirement
 As First phase development shall include below functionalities.
-* User login 
+* User signup 
 * User data input manaully 
-* intercommunication with server via HTTP API  
-* User historyu data review
-* USer data show in a plot
+* communication with server  
+* User history data viewer
+* User data shown in a table
+* User data show in a graph
 * OCR based automates User data input
 
 ### Verification Requirement
