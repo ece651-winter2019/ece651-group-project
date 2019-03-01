@@ -39,10 +39,11 @@ matrix:
         - "3.7-dev"  # 3.7 development branch
       # command to install dependencies
       install:
-        - python -m venv env
-        - pip install -r requirements.txt
+        - env/bin/pip install --upgrade pip setuptools
+        - env/bin/pip install -r requirements.txt
+        - source env/bin/activate
       # command to run tests
       script:
-#         - pytest
+        - pytest
   
 
