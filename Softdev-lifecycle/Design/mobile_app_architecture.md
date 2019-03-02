@@ -1,5 +1,5 @@
 # Mobile Application Architecture Design
-![Mobile Application Architecture Design](Images\mobile_app_architecture.png)
+![Mobile Application Architecture Design](Images/mobile_app_architecture.png)
 
 # Mobile/Server Communication Protocol
 Mobile App will use HTTP protocol to communication with server. On server side there is a HTTP API processor module will process the requests sent from Mobile App.
@@ -14,7 +14,7 @@ Example of Message
 * User Sign up process:
 - User sign up process is one time process. When application starts, it will check if a pre assigned userID is exist in phone's local storage.
 In case of the userID is exist, the app will move to user data viewer. If the userID is not exist, app will move to user sign up activity. See below flowchart.
-![Mobile Application Signup Process](Images\Signup_process.png)
+![Mobile Application Signup Process](Images/Signup_process.png)
 - At user sign up activity, user will be required to input username and user password which are arranged by doctor’s clinic, and submit these information via HTTP API to server “http://hostname/api/signup”, once user information is verified server will send an unique userID back to app. This userID will be save in phone’s local storage by app, then app will move to user data viewer.  
 
 # User Data input Activity
