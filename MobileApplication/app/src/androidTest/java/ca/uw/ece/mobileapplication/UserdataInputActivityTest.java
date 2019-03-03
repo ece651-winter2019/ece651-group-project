@@ -1,5 +1,4 @@
 package ca.uw.ece.mobileapplication;
-
 import static org.junit.Assert.*;
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -11,7 +10,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 
-import ca.uw.ece.mobileapplication.LoginActivity;
+import ca.uw.ece.mobileapplication.UserdataInputActivity;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
@@ -23,27 +22,18 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(AndroidJUnit4.class)
-public class LoginActivityTest {
+public class UserdataInputActivityTest {
 
     @Rule
-    public ActivityTestRule<LoginActivity> mActivityRule = new ActivityTestRule<>(LoginActivity.class);
+    public ActivityTestRule<UserdataInputActivity> mActivityRule = new ActivityTestRule<>(UserdataInputActivity.class);
 
     @Test
-    public void useAppContext() {
-        // Context of the app under test.
-        Context appContext = InstrumentationRegistry.getTargetContext();
-
-        assertEquals("ca.uw.ece.mobileapplication", appContext.getPackageName());
-    }
-
-    @Test
-    public void user_login() throws InterruptedException {
-        onView(withId(R.id.userName)).perform(typeText("tliu"));
-        onView(withId(R.id.password)).perform(typeText("tlkwonca"));
+    public void user_signup() throws InterruptedException {
         onView(withId(R.id.systolic)).perform(typeText("120"));
         onView(withId(R.id.diastolic)).perform(typeText("75"));
-        onView(withId(R.id.sign_in_button)).perform(click());
+        onView(withId(R.id.Heartrate)).perform(typeText("65"));
+        onView(withId(R.id.submit_button)).perform(click());
     }
 
-
 }
+
