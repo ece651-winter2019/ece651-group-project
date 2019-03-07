@@ -5,6 +5,7 @@
     <string name="prompt_password">Password</string>
     <string name="prompt_systolic">Systolic</string>
     <string name="prompt_diastolic">Diastolic</string>
+    <string name="prompt_heart_rate">HeartRate</string>
     <string name="action_sign_in">Submit</string>
     <string name="action_sign_in_short">Submit</string>
     <string name="error_invalid_username">This User name is invalid</string>

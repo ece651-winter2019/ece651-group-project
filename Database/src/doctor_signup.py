@@ -17,8 +17,8 @@ session = Session()
 
 
 doc = Doctor(
-             first_name = "Ammar",
-             last_name = "Ahmed",
+             first_name = "tong",
+             last_name = "   ",
              email = "amme@gmail.com",
              phone_no = 4323791679,
              st = "32 king st s",
@@ -26,6 +26,7 @@ doc = Doctor(
              state= "ON",
              postal_code = "N3L9f3",
             country = "Canada")
+
 
 session.add(doc)
 session.commit()

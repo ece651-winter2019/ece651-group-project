@@ -1,0 +1,10 @@
+#!/bin/bash
+set -e
+cd healthapp_project
+python -m venv env
+env/bin/pip install --upgrade pip setuptools
+env/bin/pip install -r requirements.txt
+source env/bin/activate
+cd healthapp_root
+python manage.py migrate
+gunicorn healthapp_site.wsgi
