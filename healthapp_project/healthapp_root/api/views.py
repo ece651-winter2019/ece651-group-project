@@ -59,7 +59,7 @@ def all_patient_records(request):
     """
     if request.method == 'GET':
         record = PatientRecord.objects.all()
-        serializer = RecordsSerializer(api, many=True)
+        serializer = RecordsSerializer(record, many=True)
         return JsonResponse(serializer.data, safe=False)
 
     elif request.method == 'POST':
