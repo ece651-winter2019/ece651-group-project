@@ -12,6 +12,7 @@ pytest-cov = "*"
 flake8 = "*"
 cookiecutter = "*"
 pylint = "*"
+pre-commit = "*"
 
 [packages]
 sqlalchemy = "*"

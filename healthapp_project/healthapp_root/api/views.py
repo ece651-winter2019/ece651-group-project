@@ -11,10 +11,10 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 
-#import serializers
+# import serializers
 from api.serializers import RecordsSerializer
 
-# Import models 
+# Import models
 from patients.models import PatientRecord
 from users.models import CustomUser
 
@@ -30,7 +30,7 @@ class all_patient_records(APIView):
         return Response(serializer.data)
 
     def post(self, request, format=None):
-        if type(request.data) == list: 
+        if type(request.data) == list:
             serializer = RecordsSerializer(data=request.data, many=True)
         else:
             serializer = RecordsSerializer(data=request.data)
@@ -44,6 +44,7 @@ class patient_record(APIView):
     """
     Retrieve, update or delete a record instance.
     """
+
     def get_object(self, pk):
         try:
             return PatientRecord.objects.get(pk=pk)
@@ -68,17 +69,19 @@ class patient_record(APIView):
         record.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+
 class patient_records_byusername(APIView):
     """
     Retrieve, update or delete a record instance.
     """
+
     # def get(self, request, user_id, format=None):
     #     print(username)
     #     return Response(status=status.HTTP_204_NO_CONTENT)
     def get_object(self, username):
         try:
             userid = CustomUser.objects.get(username=username).id
-            
+
             return PatientRecord.objects.filter(patient_id=userid).all()
         except CustomUser.DoesNotExist:
             raise Http404
@@ -92,15 +95,15 @@ class patient_records_byusername(APIView):
 
     def post(self, request, username, format=None):
         if type(request.data) == list:
-            userid = CustomUser.objects.get(username=username).id 
+            userid = CustomUser.objects.get(username=username).id
             data = request.data
             for d in data:
-                d['patient_id'] = userid
+                d["patient_id"] = userid
             serializer = RecordsSerializer(data=data, many=True)
         else:
-            userid = CustomUser.objects.get(username=username).id 
+            userid = CustomUser.objects.get(username=username).id
             data = request.data
-            data['patient_id'] = userid
+            data["patient_id"] = userid
             serializer = RecordsSerializer(data=data)
 
         if serializer.is_valid():

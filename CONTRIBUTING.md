@@ -182,8 +182,25 @@ pipenv install --dev
 
 You should now have a virtual environment with all dependencies installed. To activate the virtual environment simply use:
 ```console
-pipenv shellpipenv 
+pipenv shell
 ```
+
+### Setup pre-commit hooks
+
+This repo uses pre-commit hooks to make sure code formatting, testing, and complexity are acceptable  
+
+To configure pre commit hooks simply use:
+```bash
+pipenv run pre-commit
+```
+
+#### Skipping a hook
+If you need to skip a hook because it is failing. (For example flake8 is giving an error code that you know to be okay). You can skip the hook by using the following:
+`SKIP=[ID_OF_HOOK] git commit -m "[MESSAGE]"`
+Heres an actual example:
+`SKIP=flake8 git commit -m "changes made to xyz"
+
+
 
 
 ### Setting up for contribution

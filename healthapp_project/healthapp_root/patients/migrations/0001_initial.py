@@ -9,86 +9,116 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-        ('doctors', '0001_initial'),
-    ]
+    dependencies = [("doctors", "0001_initial")]
 
     operations = [
         migrations.CreateModel(
-            name='EmergencyContacts',
+            name="EmergencyContacts",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('contact_firstname', models.CharField(max_length=20)),
-                ('contact_lastname', models.CharField(max_length=20)),
-                ('relationship', models.CharField(max_length=20)),
-                ('phone', models.CharField(max_length=20)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("contact_firstname", models.CharField(max_length=20)),
+                ("contact_lastname", models.CharField(max_length=20)),
+                ("relationship", models.CharField(max_length=20)),
+                ("phone", models.CharField(max_length=20)),
             ],
         ),
         migrations.CreateModel(
-            name='HealthStats',
+            name="HealthStats",
             fields=[
-                ('record_id', models.AutoField(primary_key=True, serialize=False)),
-                ('bp_systolic', models.IntegerField()),
-                ('bp_diastolic', models.IntegerField()),
-                ('heart_rate', models.IntegerField()),
-                ('weight', models.IntegerField()),
-                ('updated', models.DateTimeField(default=django.utils.timezone.now)),
+                ("record_id", models.AutoField(primary_key=True, serialize=False)),
+                ("bp_systolic", models.IntegerField()),
+                ("bp_diastolic", models.IntegerField()),
+                ("heart_rate", models.IntegerField()),
+                ("weight", models.IntegerField()),
+                ("updated", models.DateTimeField(default=django.utils.timezone.now)),
             ],
         ),
         migrations.CreateModel(
-            name='PatientLogin',
+            name="PatientLogin",
             fields=[
-                ('login_id', models.AutoField(primary_key=True, serialize=False)),
-                ('created_on', models.DateTimeField(default=django.utils.timezone.now)),
-                ('status', models.IntegerField()),
+                ("login_id", models.AutoField(primary_key=True, serialize=False)),
+                ("created_on", models.DateTimeField(default=django.utils.timezone.now)),
+                ("status", models.IntegerField()),
             ],
         ),
         migrations.CreateModel(
-            name='PatientRecord',
+            name="PatientRecord",
             fields=[
-                ('record_id', models.AutoField(primary_key=True, serialize=False)),
-                ('patient_id', models.IntegerField()),
-                ('bp_systolic', models.IntegerField()),
-                ('bp_diastolic', models.IntegerField()),
-                ('heart_rate', models.IntegerField()),
-                ('weight', models.IntegerField()),
-                ('created_on', models.IntegerField()),
+                ("record_id", models.AutoField(primary_key=True, serialize=False)),
+                ("patient_id", models.IntegerField()),
+                ("bp_systolic", models.IntegerField()),
+                ("bp_diastolic", models.IntegerField()),
+                ("heart_rate", models.IntegerField()),
+                ("weight", models.IntegerField()),
+                ("created_on", models.IntegerField()),
             ],
         ),
         migrations.CreateModel(
-            name='Patients',
+            name="Patients",
             fields=[
-                ('patient_id', models.AutoField(primary_key=True, serialize=False)),
-                ('first_name', models.CharField(max_length=20)),
-                ('last_name', models.CharField(max_length=20)),
-                ('dob', models.CharField(max_length=10)),
-                ('sex', models.CharField(max_length=10)),
-                ('height', models.CharField(max_length=6)),
-                ('email', models.CharField(max_length=20)),
-                ('phone_no', models.CharField(max_length=20)),
-                ('street', models.CharField(max_length=20)),
-                ('city', models.CharField(max_length=20)),
-                ('state', models.CharField(max_length=2)),
-                ('postal_code', models.CharField(max_length=6)),
-                ('country', models.CharField(max_length=20)),
-                ('doctor_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='doctors.Doctors')),
-                ('emergency_C', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='patients.EmergencyContacts')),
-                ('health_stats', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='patients.HealthStats')),
+                ("patient_id", models.AutoField(primary_key=True, serialize=False)),
+                ("first_name", models.CharField(max_length=20)),
+                ("last_name", models.CharField(max_length=20)),
+                ("dob", models.CharField(max_length=10)),
+                ("sex", models.CharField(max_length=10)),
+                ("height", models.CharField(max_length=6)),
+                ("email", models.CharField(max_length=20)),
+                ("phone_no", models.CharField(max_length=20)),
+                ("street", models.CharField(max_length=20)),
+                ("city", models.CharField(max_length=20)),
+                ("state", models.CharField(max_length=2)),
+                ("postal_code", models.CharField(max_length=6)),
+                ("country", models.CharField(max_length=20)),
+                (
+                    "doctor_id",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="doctors.Doctors",
+                    ),
+                ),
+                (
+                    "emergency_C",
+                    models.OneToOneField(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="patients.EmergencyContacts",
+                    ),
+                ),
+                (
+                    "health_stats",
+                    models.OneToOneField(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="patients.HealthStats",
+                    ),
+                ),
             ],
         ),
         migrations.AddField(
-            model_name='patientlogin',
-            name='patient_id',
-            field=models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='patients.Patients'),
+            model_name="patientlogin",
+            name="patient_id",
+            field=models.OneToOneField(
+                on_delete=django.db.models.deletion.CASCADE, to="patients.Patients"
+            ),
         ),
         migrations.AddField(
-            model_name='healthstats',
-            name='patient_id',
-            field=models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='patients.Patients'),
+            model_name="healthstats",
+            name="patient_id",
+            field=models.OneToOneField(
+                on_delete=django.db.models.deletion.CASCADE, to="patients.Patients"
+            ),
         ),
         migrations.AddField(
-            model_name='emergencycontacts',
-            name='patient_id',
-            field=models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='patients.Patients'),
+            model_name="emergencycontacts",
+            name="patient_id",
+            field=models.OneToOneField(
+                on_delete=django.db.models.deletion.CASCADE, to="patients.Patients"
+            ),
         ),
     ]
