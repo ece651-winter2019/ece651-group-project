@@ -4,14 +4,20 @@ from django.contrib.auth.admin import UserAdmin
 
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 from .models import CustomUser
-from doctors.models import Profiles as DocProfiles
+from doctors.models import Profile as DocProfile
+
+
+class DocProfileInline(admin.StackedInline):
+    model = DocProfile
+    can_delete = False
+    verbose_name_plural = "doctorprofile"
 
 
 class CustomUserAdmin(UserAdmin):
     add_form = CustomUserCreationForm
     form = CustomUserChangeForm
     model = CustomUser
-    inlines = (DocProfiles,)
+    inlines = (DocProfileInline,)
     list_display = ["email", "username"]
 
 
