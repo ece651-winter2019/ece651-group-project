@@ -11,11 +11,15 @@ black = "*"
 pytest-cov = "*"
 flake8 = "*"
 cookiecutter = "*"
+pylint = "*"
 
 [packages]
 sqlalchemy = "*"
 requests = "*"
 mysqlclient = "*"
+httpie = "*"
+django = "*"
+djangorestframework = "*"
 
 [requires]
 python_version = "3.7"

@@ -64,7 +64,8 @@ class EmergencyContacts(models.Model):
 
 class PatientRecord(models.Model):
     record_id = models.AutoField(primary_key=True)
-    patient_id = models.ForeignKey(Patients, on_delete=models.CASCADE)
+    # patient_id = models.ForeignKey(Patients, on_delete=models.CASCADE)
+    patient_id = models.IntegerField(null=False)
     bp_systolic = models.IntegerField(null=False)
     bp_diastolic = models.IntegerField(null=False)
     heart_rate = models.IntegerField(null=False)
