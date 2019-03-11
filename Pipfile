@@ -18,6 +18,8 @@ sqlalchemy = "*"
 requests = "*"
 mysqlclient = "*"
 httpie = "*"
+django = "*"
+djangorestframework = "*"
 
 [requires]
 python_version = "3.7"
