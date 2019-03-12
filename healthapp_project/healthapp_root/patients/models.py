@@ -22,9 +22,6 @@ class Profile(models.Model):
     contact_relationship = models.CharField(max_length=20, null=False)
     contact_phone = models.CharField(max_length=20, null=False)
 
-    # class Meta:
-    #     db_table = 'patient_profile'
-
 
 class Record(models.Model):
     id = models.AutoField(primary_key=True)

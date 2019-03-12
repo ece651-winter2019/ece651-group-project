@@ -1,11 +1,12 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from users.forms import CustomUserCreationForm
 from django.db import transaction
 from users.models import CustomUser
 from .models import Profile
 
 
-class PatientSignUpForm(UserCreationForm):
+class PatientSignUpForm(CustomUserCreationForm):
     # interests = forms.ModelMultipleChoiceField(
     #     queryset=Subject.objects.all(),
     #     widget=forms.CheckboxSelectMultiple,
@@ -19,7 +20,7 @@ class PatientSignUpForm(UserCreationForm):
     contact_relationship = forms.CharField(max_length=20, required=True)
     contact_phone = forms.CharField(max_length=20, required=True)
 
-    class Meta(UserCreationForm.Meta):
+    class Meta(CustomUserCreationForm.Meta):
         model = CustomUser
 
     @transaction.atomic
@@ -27,9 +28,11 @@ class PatientSignUpForm(UserCreationForm):
         user = super().save(commit=False)
         user.is_patient = True
         user.save()
+
+        doctor = CustomUser.objects.get(id=self.cleaned_data["doctor_id"])
         patient_profile = Profile(
             user_id=user,
-            doctor_id=self.cleaned_data["doctor_id"],
+            doctor_id=doctor,
             dob=self.cleaned_data["dob"],
             sex=self.cleaned_data["sex"],
             contact_firstname=self.cleaned_data["contact_firstname"],

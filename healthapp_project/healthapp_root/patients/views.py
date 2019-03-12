@@ -15,6 +15,6 @@ class PatientSignUpView(generic.CreateView):
         return super().get_context_data(**kwargs)
 
     def form_valid(self, form):
-        user = form.save()
+        user, patient_profile = form.save()
         login(self.request, user)
         return redirect("home")
