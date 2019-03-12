@@ -4,8 +4,10 @@ from django.conf import settings
 
 
 class Profile(models.Model):
-    id = models.AutoField(primary_key=True)
-    user_id = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    # id = models.AutoField(primary_key=True)
+    user_id = models.OneToOneField(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, primary_key=True
+    )
     doctor_id = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=False
     )
