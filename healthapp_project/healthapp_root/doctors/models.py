@@ -4,7 +4,9 @@ from django.conf import settings
 
 
 class Profile(models.Model):
-    id = models.AutoField(primary_key=True)
+    # id = models.AutoField(primary_key=True)
+    user_id = models.OneToOneField(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, primary_key=True
+    )
     license_no = models.CharField(max_length=20, null=False)
     practice_name = models.CharField(max_length=20, null=False)
-    user_id = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)

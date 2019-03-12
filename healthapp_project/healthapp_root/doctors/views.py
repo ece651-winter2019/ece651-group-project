@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth import login
 from django.views import generic
 from users.models import CustomUser
+from .forms import DoctorSignUpForm
 
 
 class DoctorSignUpView(generic.CreateView):
