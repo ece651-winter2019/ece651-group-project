@@ -15,7 +15,7 @@ from rest_framework import status
 from api.serializers import RecordsSerializer
 
 # Import models
-from patients.models import PatientRecord
+from patients.models import Record as PatientRecord
 from users.models import CustomUser
 
 # @csrf_exempt
