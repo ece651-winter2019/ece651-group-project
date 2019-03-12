@@ -6,7 +6,11 @@ from django.conf import settings
 class Profile(models.Model):
     # id = models.AutoField(primary_key=True)
     user_id = models.OneToOneField(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, primary_key=True
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        primary_key=True,
+        parent_link=True,
+        related_name="patient_profile",
     )
     doctor_id = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=False
@@ -17,6 +21,9 @@ class Profile(models.Model):
     contact_lastname = models.CharField(max_length=20, null=False)
     contact_relationship = models.CharField(max_length=20, null=False)
     contact_phone = models.CharField(max_length=20, null=False)
+
+    # class Meta:
+    #     db_table = 'patient_profile'
 
 
 class Record(models.Model):

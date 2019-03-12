@@ -8,23 +8,23 @@ from doctors.models import Profile as DocProfile
 from patients.models import Profile as PatProfile
 
 
-class DocProfileInline(admin.StackedInline):
-    model = DocProfile
-    can_delete = False
-    verbose_name_plural = "doctor profile"
+# class DocProfileInline(admin.StackedInline):
+#     model = DocProfile
+#     can_delete = False
+#     verbose_name_plural = "doctor profile"
 
 
-class PatProfileInline(admin.StackedInline):
-    model = PatProfile
-    can_delete = False
-    verbose_name_plural = "patient profile"
+# class PatProfileInline(admin.StackedInline):
+#     model = PatProfile
+#     can_delete = False
+#     verbose_name_plural = "patient profile"
 
 
 class CustomUserAdmin(UserAdmin):
     add_form = CustomUserCreationForm
     form = CustomUserChangeForm
     model = CustomUser
-    inlines = (DocProfileInline, PatProfileInline)
+    # inlines = (DocProfileInline, PatProfileInline)
     list_display = ["email", "username"]
 
 
