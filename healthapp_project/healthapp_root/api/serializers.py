@@ -1,18 +1,19 @@
 from rest_framework import serializers
-from patients.models import PatientRecord
+from patients.models import Record as PatientRecord
 
 
 class RecordsSerializer(serializers.ModelSerializer):
     class Meta:
         model = PatientRecord
         fields = (
-            "record_id",
-            "patient_id",
+            "id",
+            "user",
             "bp_systolic",
             "bp_diastolic",
             "heart_rate",
             "weight",
             "created_on",
+            "height",
         )
 
 
