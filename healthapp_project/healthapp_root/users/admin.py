@@ -25,7 +25,7 @@ class CustomUserAdmin(UserAdmin):
     form = CustomUserChangeForm
     model = CustomUser
     # inlines = (DocProfileInline, PatProfileInline)
-    list_display = ["email", "username"]
+    list_display = ["id", "email", "username", "first_name", "last_name"]
 
 
 admin.site.register(CustomUser, CustomUserAdmin)

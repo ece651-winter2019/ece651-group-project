@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from users.forms import CustomUserCreationForm
 from django.db import transaction
 from users.models import CustomUser
+from doctors.models import Profile as DocProfile
 from .models import Profile
 
 
@@ -29,7 +30,7 @@ class PatientSignUpForm(CustomUserCreationForm):
         user.is_patient = True
         user.save()
 
-        doctor = CustomUser.objects.get(id=self.cleaned_data["doctor_id"])
+        doctor = DocProfile.objects.get(user=self.cleaned_data["doctor_id"])
         patient_profile = Profile(
             user=user,
             doctor=doctor,
