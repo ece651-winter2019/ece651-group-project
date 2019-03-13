@@ -31,8 +31,8 @@ class PatientSignUpForm(CustomUserCreationForm):
 
         doctor = CustomUser.objects.get(id=self.cleaned_data["doctor_id"])
         patient_profile = Profile(
-            user_id=user,
-            doctor_id=doctor,
+            user=user,
+            doctor=doctor,
             dob=self.cleaned_data["dob"],
             sex=self.cleaned_data["sex"],
             contact_firstname=self.cleaned_data["contact_firstname"],

@@ -24,7 +24,7 @@ class DoctorSignUpForm(CustomUserCreationForm):
         user.is_doctor = True
         user.save()
         doctor_profile = Profile(
-            user_id=user,
+            user=user,
             license_no=self.cleaned_data["license_no"],
             practice_name=self.cleaned_data["practice_name"],
         )

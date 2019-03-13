@@ -5,7 +5,7 @@ from django.conf import settings
 
 class Profile(models.Model):
     # id = models.AutoField(primary_key=True)
-    user_id = models.OneToOneField(
+    user = models.OneToOneField(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         primary_key=True,
@@ -14,6 +14,3 @@ class Profile(models.Model):
     )
     license_no = models.CharField(max_length=20, null=False)
     practice_name = models.CharField(max_length=20, null=False)
-
-    # class Meta:
-    #     db_table = 'doctor_profile'

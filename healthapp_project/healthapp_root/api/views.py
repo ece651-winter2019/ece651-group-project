@@ -98,12 +98,12 @@ class patient_records_byusername(APIView):
             userid = CustomUser.objects.get(username=username).id
             data = request.data
             for d in data:
-                d["patient_id"] = userid
+                d["user"] = userid
             serializer = RecordsSerializer(data=data, many=True)
         else:
             userid = CustomUser.objects.get(username=username).id
             data = request.data
-            data["patient_id"] = userid
+            data["user"] = userid
             serializer = RecordsSerializer(data=data)
 
         if serializer.is_valid():

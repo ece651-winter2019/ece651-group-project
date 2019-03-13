@@ -1,20 +1,19 @@
 from django.db import models
 from django.utils import timezone
 from django.conf import settings
+from doctors.models import Profile as DocProfile
 
 
 class Profile(models.Model):
     # id = models.AutoField(primary_key=True)
-    user_id = models.OneToOneField(
+    user = models.OneToOneField(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         primary_key=True,
         parent_link=True,
         related_name="patient_profile",
     )
-    doctor_id = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=False
-    )
+    doctor = models.ForeignKey(DocProfile, on_delete=models.SET_NULL, null=True)
     dob = models.CharField(max_length=10, null=False)
     sex = models.CharField(max_length=10, null=False)
     contact_firstname = models.CharField(max_length=20, null=False)
@@ -25,7 +24,7 @@ class Profile(models.Model):
 
 class Record(models.Model):
     id = models.AutoField(primary_key=True)
-    user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     bp_systolic = models.IntegerField(null=False)
     bp_diastolic = models.IntegerField(null=False)
     heart_rate = models.IntegerField(null=False)

@@ -7,7 +7,7 @@ class RecordsSerializer(serializers.ModelSerializer):
         model = PatientRecord
         fields = (
             "id",
-            "user_id",
+            "user",
             "bp_systolic",
             "bp_diastolic",
             "heart_rate",

@@ -30,16 +30,6 @@ class CustomUserCreationForm(UserCreationForm):
             "country",
         )
 
-    # @transaction.atomic
-    # def save(self, commit=True):
-    #     pass
-    # user = super().save(commit=False)
-    # print(self.cleaned_data["first_name"])
-    # # user.first_name=self.cleaned_data["first_name"]
-    # if commit:
-    #     user.save()
-    # return user
-
 
 class CustomUserChangeForm(UserChangeForm):
     class Meta:
