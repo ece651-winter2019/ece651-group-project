@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 
 import os
 import django_heroku
+import sys
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -81,9 +82,7 @@ WSGI_APPLICATION = "healthapp_site.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-if (
-    "test" in sys.argv or "test_coverage" in sys.argv
-):  # Covers regular testing and django-coverage
+if ("test" in sys.argv or "test_coverage" in sys.argv):  # Covers regular testing and django-coverage
     DATABASES = {"default": {"ENGINE": "django.db.backends.sqlite3"}}
 else:
     DATABASES = {"default": {"ENGINE": "mysql.connector.django"}}
@@ -135,10 +134,10 @@ EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
 EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
 AUTH_USER_MODEL = "users.CustomUser"
 
-# Activate Django-Heroku.
-django_heroku.settings(locals())
-del DATABASES["default"]["OPTIONS"]["sslmode"]
-DATABASES["default"]["ENGINE"] = "mysql.connector.django"
+## Activate Django-Heroku.
+#django_heroku.settings(locals())
+#del DATABASES["default"]["OPTIONS"]["sslmode"]
+#DATABASES["default"]["ENGINE"] = "mysql.connector.django"
 
 
 print(DATABASES["default"])
