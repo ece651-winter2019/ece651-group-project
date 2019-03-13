@@ -81,7 +81,17 @@ WSGI_APPLICATION = "healthapp_site.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-DATABASES = {"default": {"ENGINE": "mysql.connector.django"}}
+if 'test' in sys.argv or 'test_coverage' in sys.argv: #Covers regular testing and django-coverage
+    DATABASES = { "default": {"ENGINE": "django.db.backends.sqlite3"} }
+else:
+    DATABASES = {"default": {"ENGINE": "mysql.connector.django"}}
+    # Activate Django-Heroku.
+    django_heroku.settings(locals())
+    del DATABASES["default"]["OPTIONS"]["sslmode"]
+    DATABASES["default"]["ENGINE"] = "mysql.connector.django"
+
+
+#DATABASES = {"default": {"ENGINE": "mysql.connector.django"}}
 
 
 # Password validation
