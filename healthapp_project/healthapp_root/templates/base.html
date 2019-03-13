@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>{% block title %}Django School{% endblock %}</title>
+    <title>{% block title %}MobiHealth{% endblock %}</title>
     <link rel="icon" href="{% static 'img/favicon.png' %}">
     <link href="https://fonts.googleapis.com/css?family=Clicker+Script" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -24,7 +24,7 @@
             <div class="col-6">
               <h1 class="logo">
                 <a href="{% url 'home' %}">
-                  Django School
+                  MobiHealth
                   {% if user.is_authenticated %}
                     {% if user.is_teacher %}
                       <span class="icon-feather" data-toggle="tooltip" data-placement="right" title="Teacher profile"></span>
