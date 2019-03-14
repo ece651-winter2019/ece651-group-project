@@ -1,6 +1,7 @@
 from django.test import TestCase
 from doctors.models import Profile
 from users.models import CustomUser
+
 # Create your tests here.
 
 
@@ -9,7 +10,7 @@ class ProfileModelClass(TestCase):
     def setUpTestData(cls):
         # Set up non-modified objects used by all test methods
         Profile.objects.create(license_no=123, practice_name="health clinic")
-        CustomUser.objects.create(is_doctor= True)
+        CustomUser.objects.create(is_doctor=True)
 
     def test_practice_name_label(self):
         # Get a profile object to test
@@ -28,5 +29,3 @@ class ProfileModelClass(TestCase):
         profile = Profile.objects.get(user_id=1)
         max_length = profile._meta.get_field("practice_name").max_length
         self.assertEquals(max_length, 20)
-
-
