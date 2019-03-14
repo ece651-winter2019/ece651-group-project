@@ -8,7 +8,7 @@ class ProfileModelClass(TestCase):
     @classmethod
     def setUpTestData(cls):
         # Set up non-modified objects used by all test methods
-        Profile.objects.create(license_no="123", practice_name="health clinic")
+        Profile.objects.create(license_no=123, practice_name="health clinic")
         CustomUser.objects.create(is_doctor= True)
 
     def test_practice_name_label(self):
