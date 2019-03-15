@@ -10,9 +10,9 @@
     <link rel="stylesheet" type="text/css" href="{% static 'vendor/fontello-2f186091/css/fontello.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/app.css' %}">
     {% if user.is_authenticated and user.is_teacher %}
-      <link rel="stylesheet" type="text/css" href="{% static 'css/teachers.css' %}">
+      <link rel="stylesheet" type="text/css" href="{% static 'css/doctors.css' %}">
     {% else %}
-      <link rel="stylesheet" type="text/css" href="{% static 'css/students.css' %}">
+      <link rel="stylesheet" type="text/css" href="{% static 'css/patients.css' %}">
     {% endif %}
   </head>
   <body>
@@ -27,9 +27,9 @@
                   MobiHealth
                   {% if user.is_authenticated %}
                     {% if user.is_teacher %}
-                      <span class="icon-feather" data-toggle="tooltip" data-placement="right" title="Teacher profile"></span>
+                      <span class="icon-feather" data-toggle="tooltip" data-placement="right" title="Doctor profile"></span>
                     {% else %}
-                      <span class="icon-graduation-cap" data-toggle="tooltip" data-placement="right" title="Student profile"></span>
+                      <span class="icon-graduation-cap" data-toggle="tooltip" data-placement="right" title="Patient profile"></span>
                     {% endif %}
                   {% endif %}
                 </a>
