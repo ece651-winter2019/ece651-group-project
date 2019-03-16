@@ -29,5 +29,5 @@ class Record(models.Model):
     bp_diastolic = models.IntegerField(null=False)
     heart_rate = models.IntegerField(null=False)
     weight = models.IntegerField(null=False)
-    created_on = models.IntegerField(null=False)
+    created_on = models.DateTimeField(auto_now_add=True)
     height = models.CharField(max_length=6, null=False)
