@@ -26,7 +26,7 @@
                 <a href="{% url 'home' %}">
                   MobiHealth
                   {% if user.is_authenticated %}
-                    {% if user.is_teacher %}
+                    {% if user.is_doctor %}
                       <span class="icon-feather" data-toggle="tooltip" data-placement="right" title="Doctor profile"></span>
                     {% else %}
                       <span class="icon-graduation-cap" data-toggle="tooltip" data-placement="right" title="Patient profile"></span>
