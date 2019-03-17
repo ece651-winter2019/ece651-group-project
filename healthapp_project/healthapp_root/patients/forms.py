@@ -28,6 +28,7 @@ class PatientSignUpForm(CustomUserCreationForm):
     def save(self):
         user = super().save(commit=False)
         user.is_patient = True
+        user.is_doctor = False
         user.save()
 
         doctor = DocProfile.objects.get(user=self.cleaned_data["doctor_id"])

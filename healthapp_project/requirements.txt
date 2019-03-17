@@ -3,7 +3,9 @@ attrs==18.2.0
 dj-database-url==0.5.0
 Django==2.1.7
 django-crispy-forms==1.7.2
+django-filter==2.1.0
 django-heroku==0.3.1
+django-rest-authtoken==1.2.2
 djangorestframework==3.9.1
 gunicorn==19.9.0
 more-itertools==6.0.0

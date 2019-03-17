@@ -4,19 +4,30 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{% block title %}MobiHealth{% endblock %}</title>
+<<<<<<< HEAD
+=======
     <link rel="icon" href="{% static 'img/favicon.png' %}">
+>>>>>>> master
     <link href="https://fonts.googleapis.com/css?family=Clicker+Script" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="{% static 'vendor/fontello-2f186091/css/fontello.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/fontello-b16be797/css/fontello.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/app.css' %}">
+<<<<<<< HEAD
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'img/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/favicon-32x32.png'%}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'img/favicon-16x16.png'%}">
+    <link rel="manifest" href="{% static 'img/site.webmanifest'%}">
+    {% if user.is_authenticated and user.is_doctor %}
+=======
     {% if user.is_authenticated and user.is_teacher %}
+>>>>>>> master
       <link rel="stylesheet" type="text/css" href="{% static 'css/doctors.css' %}">
     {% else %}
       <link rel="stylesheet" type="text/css" href="{% static 'css/patients.css' %}">
     {% endif %}
   </head>
   <body>
-    <a href="https://github.com/sibtc/django-multiple-user-types-example"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+    <a href="https://github.com/ece651-winter2019/ece651-group-project"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
     <div class="container my-4">
       <div class="row justify-content-center">
         <div class="col-md-10 col-sm-12">
@@ -27,9 +38,15 @@
                   MobiHealth
                   {% if user.is_authenticated %}
                     {% if user.is_doctor %}
+<<<<<<< HEAD
+                      <span class="icon-user-md" data-toggle="tooltip" data-placement="right" title="Doctor profile"></span>
+                    {% else %}
+                      <span class="icon-heartbeat" data-toggle="tooltip" data-placement="right" title="Patient profile"></span>
+=======
                       <span class="icon-feather" data-toggle="tooltip" data-placement="right" title="Doctor profile"></span>
                     {% else %}
                       <span class="icon-graduation-cap" data-toggle="tooltip" data-placement="right" title="Patient profile"></span>
+>>>>>>> master
                     {% endif %}
                   {% endif %}
                 </a>
@@ -59,7 +76,7 @@
             </div>
           </div>
           <footer>
-            <a href="https://github.com/sibtc/django-multiple-user-types-example">GitHub repository</a>
+            <a href="https://github.com/ece651-winter2019/ece651-group-project">GitHub repository</a>
           </footer>
         </div>
       </div>
