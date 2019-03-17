@@ -9,7 +9,6 @@ class Profile(models.Model):
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
-        primary_key=True,
         parent_link=True,
         related_name="patient_profile",
     )
