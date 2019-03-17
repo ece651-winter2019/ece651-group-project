@@ -9,33 +9,48 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Profile',
+            name="Profile",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, parent_link=True, related_name='patient_profile', to=settings.AUTH_USER_MODEL)),
-                ('dob', models.CharField(max_length=10)),
-                ('sex', models.CharField(max_length=10)),
-                ('contact_firstname', models.CharField(max_length=20)),
-                ('contact_lastname', models.CharField(max_length=20)),
-                ('contact_relationship', models.CharField(max_length=20)),
-                ('contact_phone', models.CharField(max_length=20)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "user",
+                    models.OneToOneField(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        parent_link=True,
+                        related_name="patient_profile",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+                ("dob", models.CharField(max_length=10)),
+                ("sex", models.CharField(max_length=10)),
+                ("contact_firstname", models.CharField(max_length=20)),
+                ("contact_lastname", models.CharField(max_length=20)),
+                ("contact_relationship", models.CharField(max_length=20)),
+                ("contact_phone", models.CharField(max_length=20)),
             ],
         ),
         migrations.CreateModel(
-            name='Record',
+            name="Record",
             fields=[
-                ('id', models.AutoField(primary_key=True, serialize=False)),
-                ('bp_systolic', models.IntegerField()),
-                ('bp_diastolic', models.IntegerField()),
-                ('heart_rate', models.IntegerField()),
-                ('weight', models.IntegerField()),
-                ('created_on', models.DateTimeField(auto_now_add=True)),
-                ('height', models.CharField(max_length=6)),
+                ("id", models.AutoField(primary_key=True, serialize=False)),
+                ("bp_systolic", models.IntegerField()),
+                ("bp_diastolic", models.IntegerField()),
+                ("heart_rate", models.IntegerField()),
+                ("weight", models.IntegerField()),
+                ("created_on", models.DateTimeField(auto_now_add=True)),
+                ("height", models.CharField(max_length=6)),
             ],
         ),
     ]

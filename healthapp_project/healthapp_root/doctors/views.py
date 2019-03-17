@@ -20,8 +20,9 @@ class DoctorSignUpView(generic.CreateView):
         login(self.request, user)
         return redirect("home")
 
+
 class DoctorDashboard(generic.ListView):
-    context_object_name = 'patient_list'
+    context_object_name = "patient_list"
     template_name = "dashboard.html"
 
     def get_queryset(self):
@@ -29,7 +30,7 @@ class DoctorDashboard(generic.ListView):
         This will return the default query set for the class when the view method is called
         """
 
-        print(f'DOCTOR IS {self.request.user.id}')
+        print(f"DOCTOR IS {self.request.user.id}")
         return PatProfile.objects.filter(doctor_id=self.request.user.id).all()
 
     def get_context_data(self, **kwargs):
@@ -39,7 +40,6 @@ class DoctorDashboard(generic.ListView):
         context = super(DoctorDashboard, self).get_context_data(**kwargs)
         # context['patient_data'] = Hotel.objects.all().order_by('star').reverse()[:3]
         return context
-
 
     # def get_queryset(self):
     #     user = self.request.user

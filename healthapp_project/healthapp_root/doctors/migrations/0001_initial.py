@@ -9,17 +9,32 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Profile',
+            name="Profile",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, parent_link=True, related_name='doctor_profile', to=settings.AUTH_USER_MODEL)),
-                ('license_no', models.CharField(max_length=20)),
-                ('practice_name', models.CharField(max_length=20)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "user",
+                    models.OneToOneField(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        parent_link=True,
+                        related_name="doctor_profile",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+                ("license_no", models.CharField(max_length=20)),
+                ("practice_name", models.CharField(max_length=20)),
             ],
-        ),
+        )
     ]

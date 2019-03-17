@@ -7,14 +7,16 @@ import django.db.models.deletion
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('patients', '0002_auto_20190317_0413'),
-    ]
+    dependencies = [("patients", "0002_auto_20190317_0413")]
 
     operations = [
         migrations.AlterField(
-            model_name='profile',
-            name='user',
-            field=models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, related_name='patient_profile', to=settings.AUTH_USER_MODEL),
-        ),
+            model_name="profile",
+            name="user",
+            field=models.OneToOneField(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="patient_profile",
+                to=settings.AUTH_USER_MODEL,
+            ),
+        )
     ]

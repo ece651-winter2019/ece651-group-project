@@ -13,6 +13,6 @@ def home_page(request):
 
     if request.user.is_authenticated:
         if request.user.is_doctor:
-            return redirect('dashboard')
+            return redirect("dashboard")
     else:
         return render(request, "home.html")

@@ -11,7 +11,9 @@ class Profile(models.Model):
         on_delete=models.CASCADE,
         related_name="patient_profile",
     )
-    doctor = models.ForeignKey(DocProfile, to_field="user", on_delete=models.SET_NULL, null=True)
+    doctor = models.ForeignKey(
+        DocProfile, to_field="user", on_delete=models.SET_NULL, null=True
+    )
     dob = models.CharField(max_length=10, null=False)
     sex = models.CharField(max_length=10, null=False)
     contact_firstname = models.CharField(max_length=20, null=False)

@@ -10,20 +10,26 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('doctors', '0001_initial'),
+        ("doctors", "0001_initial"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('patients', '0001_initial'),
+        ("patients", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='record',
-            name='user',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),
+            model_name="record",
+            name="user",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL
+            ),
         ),
         migrations.AddField(
-            model_name='profile',
-            name='doctor',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='doctors.Profile'),
+            model_name="profile",
+            name="doctor",
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                to="doctors.Profile",
+            ),
         ),
     ]
