@@ -4,23 +4,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{% block title %}MobiHealth{% endblock %}</title>
-<<<<<<< HEAD
-=======
-    <link rel="icon" href="{% static 'img/favicon.png' %}">
->>>>>>> master
     <link href="https://fonts.googleapis.com/css?family=Clicker+Script" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{% static 'vendor/fontello-b16be797/css/fontello.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/app.css' %}">
-<<<<<<< HEAD
     <link rel="apple-touch-icon" sizes="180x180" href="{% static 'img/apple-touch-icon.png' %}">
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/favicon-32x32.png'%}">
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'img/favicon-16x16.png'%}">
     <link rel="manifest" href="{% static 'img/site.webmanifest'%}">
     {% if user.is_authenticated and user.is_doctor %}
-=======
-    {% if user.is_authenticated and user.is_teacher %}
->>>>>>> master
       <link rel="stylesheet" type="text/css" href="{% static 'css/doctors.css' %}">
     {% else %}
       <link rel="stylesheet" type="text/css" href="{% static 'css/patients.css' %}">
@@ -38,15 +30,9 @@
                   MobiHealth
                   {% if user.is_authenticated %}
                     {% if user.is_doctor %}
-<<<<<<< HEAD
                       <span class="icon-user-md" data-toggle="tooltip" data-placement="right" title="Doctor profile"></span>
                     {% else %}
                       <span class="icon-heartbeat" data-toggle="tooltip" data-placement="right" title="Patient profile"></span>
-=======
-                      <span class="icon-feather" data-toggle="tooltip" data-placement="right" title="Doctor profile"></span>
-                    {% else %}
-                      <span class="icon-graduation-cap" data-toggle="tooltip" data-placement="right" title="Patient profile"></span>
->>>>>>> master
                     {% endif %}
                   {% endif %}
                 </a>
