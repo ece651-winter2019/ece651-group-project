@@ -8,7 +8,6 @@ class Profile(models.Model):
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
-        parent_link=True,
         related_name="doctor_profile",
     )
     license_no = models.CharField(max_length=20, null=False)

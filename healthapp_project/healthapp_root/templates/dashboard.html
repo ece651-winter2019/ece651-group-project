@@ -10,7 +10,7 @@
       <ul>
         <p>List of Patients:</p>
           {% for patient in patient_list %}
-              <li>{{ patient.user_id }}</li>
+              <li>{{ patient.user.first_name}} {{patient.user.last_name }} ID: {{patient.user_id}}</li>
           {% endfor %}
       </ul> 
   {% endif %}

@@ -6,7 +6,7 @@
     <title>{% block title %}MobiHealth{% endblock %}</title>
     <link href="https://fonts.googleapis.com/css?family=Clicker+Script" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="{% static 'vendor/fontello-2f186091/css/fontello.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/fontello-b16be797/css/fontello.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/app.css' %}">
     <link rel="apple-touch-icon" sizes="180x180" href="{% static 'img/apple-touch-icon.png' %}">
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/favicon-32x32.png'%}">
@@ -30,9 +30,9 @@
                   MobiHealth
                   {% if user.is_authenticated %}
                     {% if user.is_doctor %}
-                      <span class="icon-feather" data-toggle="tooltip" data-placement="right" title="Doctor profile"></span>
+                      <span class="icon-user-md" data-toggle="tooltip" data-placement="right" title="Doctor profile"></span>
                     {% else %}
-                      <span class="icon-graduation-cap" data-toggle="tooltip" data-placement="right" title="Patient profile"></span>
+                      <span class="icon-heartbeat" data-toggle="tooltip" data-placement="right" title="Patient profile"></span>
                     {% endif %}
                   {% endif %}
                 </a>
