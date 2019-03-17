@@ -10,6 +10,7 @@ from rest_framework.parsers import JSONParser
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
 
 # import serializers
 from api.serializers import RecordsSerializer
@@ -20,6 +21,8 @@ from users.models import CustomUser
 
 # @csrf_exempt
 class all_patient_records(APIView):
+    # Allow for requests only if user is authenticated
+    permission_classes = (IsAuthenticated,)
     """
     List all patient records or add new record
     """
@@ -41,6 +44,9 @@ class all_patient_records(APIView):
 
 
 class patient_record(APIView):
+
+    # Allow for requests only if user is authenticated
+    permission_classes = (IsAuthenticated,)
     """
     Retrieve, update or delete a record instance.
     """
@@ -71,6 +77,9 @@ class patient_record(APIView):
 
 
 class patient_records_byusername(APIView):
+
+    # Allow for requests only if user is authenticated
+    permission_classes = (IsAuthenticated,)
     """
     Retrieve, update or delete a record instance.
     """

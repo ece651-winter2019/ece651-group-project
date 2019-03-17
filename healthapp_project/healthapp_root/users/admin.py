@@ -54,4 +54,11 @@ class CustomUserAdmin(UserAdmin):
             return unfiltered
 
 
+actions = ["delete_selected"]
+
+
+def delete_selected(self, request, obj):
+    obj.delete()
+
+
 admin.site.register(CustomUser, CustomUserAdmin)

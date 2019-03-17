@@ -9,11 +9,11 @@ class Profile(models.Model):
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
-        primary_key=True,
-        parent_link=True,
         related_name="patient_profile",
     )
-    doctor = models.ForeignKey(DocProfile, on_delete=models.SET_NULL, null=True)
+    doctor = models.ForeignKey(
+        DocProfile, to_field="user", on_delete=models.SET_NULL, null=True
+    )
     dob = models.CharField(max_length=10, null=False)
     sex = models.CharField(max_length=10, null=False)
     contact_firstname = models.CharField(max_length=20, null=False)

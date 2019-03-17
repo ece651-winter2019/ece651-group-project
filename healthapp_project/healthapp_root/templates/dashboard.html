@@ -1,0 +1,52 @@
+<!-- templates/home.html -->
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Dashboard{% endblock %}
+
+{% comment %}
+{% block content %}
+{% if user.is_authenticated %}
+  {% if user.is_doctor %}
+      <h2>Patients</h2>
+      <ul>
+        <p>List of Patients:</p>
+          {% for patient in patient_list %}
+              <li>{{ patient.user.first_name}} {{patient.user.last_name }} ID: {{patient.user_id}}</li>
+          {% endfor %}
+      </ul>
+  {% endif %}
+{% endif %}
+{% endblock %}
+ {% endcomment %}
+
+{% block content %}
+  {% comment %} {% include 'classroom/students/_header.html' with active='new' %} {% endcomment %}
+  <div class="card">
+    <table class="table mb-0">
+      <thead>
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>ID</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for patient in patient_list %}
+          <tr>
+            <td class="align-middle">{{ patient.user.first_name }}</td>
+            <td class="align-middle">{{ patient.user.last_name }}</td>
+            <td class="align-middle">{{ patient.user_id }} </td>
+            <td class="text-right">
+              <a href="{% url 'home' %}" class="btn btn-primary">View Records</a>
+            </td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td class="bg-light text-center font-italic" colspan="4">No Patients</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
