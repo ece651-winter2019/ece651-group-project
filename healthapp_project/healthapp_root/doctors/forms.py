@@ -22,6 +22,7 @@ class DoctorSignUpForm(CustomUserCreationForm):
     def save(self):
         user = super().save(commit=False)
         user.is_doctor = True
+        user.is_patient = False
         user.save()
         doctor_profile = Profile(
             user=user,

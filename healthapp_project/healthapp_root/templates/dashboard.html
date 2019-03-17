@@ -1,0 +1,18 @@
+<!-- templates/home.html -->
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+  {% if user.is_doctor %}
+      <h2>Patients</h2>
+      <ul>
+        <p>List of Patients:</p>
+          {% for patient in patient_list %}
+              <li>{{ patient.user_id }}</li>
+          {% endfor %}
+      </ul> 
+  {% endif %}
+{% endif %}
+{% endblock %}
