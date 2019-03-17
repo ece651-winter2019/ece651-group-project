@@ -10,11 +10,11 @@ repos:
     - id: flake8
     - id: trailing-whitespace
       args: [--markdown-linebreak-ext=md]
--   repo: local
-    hooks:
-    -   id: wily
-        name: wily
-        entry: wily diff
-        verbose: true
-        language: python
-        additional_dependencies: [wily]
+# -   repo: local
+#     hooks:
+#     -   id: wily
+#         name: wily
+#         entry: wily diff
+#         verbose: true
+#         language: python
+#         additional_dependencies: [wily]
