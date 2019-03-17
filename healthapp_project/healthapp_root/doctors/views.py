@@ -18,7 +18,7 @@ class DoctorSignUpView(generic.CreateView):
     def form_valid(self, form):
         user, doctor_profile = form.save()
         login(self.request, user)
-        return redirect("dashboard")
+        return redirect("home")
 
 class DoctorDashboard(generic.ListView):
     context_object_name = 'patient_list'
@@ -37,7 +37,6 @@ class DoctorDashboard(generic.ListView):
         This will allow you to add additional fields to the conext object that is sent to the view
         """
         context = super(DoctorDashboard, self).get_context_data(**kwargs)
-        print(context['patient_list'])
         # context['patient_data'] = Hotel.objects.all().order_by('star').reverse()[:3]
         return context
 

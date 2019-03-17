@@ -10,5 +10,9 @@ from users.models import CustomUser
 def home_page(request):
     if request.user.is_superuser:
         return HttpResponseRedirect("/admin/")
+
+    if request.user.is_authenticated:
+        if request.user.is_doctor:
+            return redirect('dashboard')
     else:
         return render(request, "home.html")
