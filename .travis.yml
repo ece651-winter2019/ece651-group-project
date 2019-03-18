@@ -41,11 +41,10 @@ matrix:
       install:
         - python -m venv env
         - ls
-        - source env/bin/activate
-        - pip install --upgrade pip setuptools
-        - pip install -r requirements.txt
+        - env/bin/pip install --upgrade pip setuptools
+        - env/bin/pip install -r requirements.txt
       # command to run tests
       script:
-        - pytest
+        - env/bin/pytest
   
 
