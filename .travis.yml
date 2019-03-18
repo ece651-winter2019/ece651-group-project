@@ -1,3 +1,4 @@
+
 matrix:
   include:
     - language: android
@@ -40,11 +41,14 @@ matrix:
       # command to install dependencies
       install:
         - python -m venv env
+	- python --version
         - ls
-        - env/bin/pip install --upgrade pip setuptools
-        - env/bin/pip install -r requirements.txt
+	- source env/bin/activate
+	- python --version
+        - pip install --upgrade pip setuptools
+        - pip install -r requirements.txt
       # command to run tests
       script:
-        - env/bin/pytest
+        - pytest
   
 
