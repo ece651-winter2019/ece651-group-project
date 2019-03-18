@@ -1,24 +1,24 @@
-#from django.test import TestCase
-#from doctors.forms import DoctorSignUpForm
-#from users.models import CustomUser
-#from django.test import Client
-#import datetime
-#from django.utils import timezone
-#from doctors.models import Profile
+# from django.test import TestCase
+# from doctors.forms import DoctorSignUpForm
+# from users.models import CustomUser
+# from django.test import Client
+# import datetime
+# from django.utils import timezone
+# from doctors.models import Profile
 #
 #
 #
-#class Setup_Class(TestCase):
+# class Setup_Class(TestCase):
 #    def setUp(self):
 #        self.user = CustomUser.objects.create(license_no=123, practice_name="health clinic")
 #
-#class Doctor_SignUp_Form_Test(TestCase):
-#    
+# class Doctor_SignUp_Form_Test(TestCase):
+#
 #    # Valid Form Data
 #    def test_DoctorSignUpForm_valid(self):
 #        form = DoctorSignUpForm(data={'user': "12",'license_no': "123", 'practice_name': "health clinic"})
 #        self.assertTrue(form.is_valid())
-#    
+#
 #    # Invalid Form Data
 #    def test_DoctorSignUpForm_invalid(self):
 #        form = DoctorSignUpForm(data={'email': "", 'password': "mp", 'first_name': "mp", 'phone': ""})
