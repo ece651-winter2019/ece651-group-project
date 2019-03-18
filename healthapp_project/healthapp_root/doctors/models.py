@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.conf import settings
 
 
+
 class Profile(models.Model):
     # id = models.AutoField(primary_key=True)
     user = models.OneToOneField(
