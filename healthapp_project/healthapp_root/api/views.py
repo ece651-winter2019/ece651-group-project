@@ -8,15 +8,19 @@ from django.http import Http404
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
 from rest_framework.views import APIView
+from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 
 # import serializers
 from api.serializers import RecordsSerializer
+from api.serializers import UserSerializer, PatProfileSerializer, DocProfileSerializer
 
 # Import models
 from patients.models import Record as PatientRecord
+from patients.models import Profile as PatProfile
+from doctors.models import Profile as DocProfile
 from users.models import CustomUser
 
 # @csrf_exempt
@@ -134,29 +138,22 @@ class patient_records_byusername(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-# @csrf_exempt
-# def patient_record(request, pk):
-#     """
-#     Retrieve, update or delete a patient record.
-#     """
-#     try:
-#         record = PatientRecord.objects.get(pk=pk)
-#     except PatientRecord.DoesNotExist:
-#         return HttpResponse(status=404)
+class Users(ListAPIView):
+    # Allow for requests only if user is authenticated
+    queryset = CustomUser.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = (IsAdminUser, IsAuthenticated)
 
-#     if request.method == 'GET':
-#         serializer = RecordsSerializer(record)
-#         return JsonResponse(serializer.data)
 
-#     elif request.method == 'PUT':
-#         data = JSONParser().parse(request)
-#         serializer = RecordsSerializer(record, data=data)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return JsonResponse(serializer.data)
-#         return JsonResponse(serializer.errors, status=400)
+class Patients(ListAPIView):
+    # Allow for requests only if user is authenticated
+    queryset = PatProfile.objects.all()
+    serializer_class = PatProfileSerializer
+    permission_classes = (IsAdminUser, IsAuthenticated)
 
-#     elif request.method == 'DELETE':
-#         record.delete()
-#         return HttpResponse(status=204)
-# # Create your views here.
+
+class Doctors(ListAPIView):
+    # Allow for requests only if user is authenticated
+    queryset = DocProfile.objects.all()
+    serializer_class = DocProfileSerializer
+    permission_classes = (IsAdminUser, IsAuthenticated)
