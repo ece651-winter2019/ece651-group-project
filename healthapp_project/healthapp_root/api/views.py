@@ -12,10 +12,17 @@ from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework import filters
+
+# import django filters
+from django_filters.rest_framework import DjangoFilterBackend
 
 # import serializers
 from api.serializers import RecordsSerializer
 from api.serializers import UserSerializer, PatProfileSerializer, DocProfileSerializer
+
+# import api permissions
+from api.permissions import IsPatientUser
 
 # Import models
 from patients.models import Record as PatientRecord
@@ -24,23 +31,36 @@ from doctors.models import Profile as DocProfile
 from users.models import CustomUser
 
 # @csrf_exempt
-class all_patient_records(APIView):
+class all_patient_records(ListAPIView):
     # Allow for requests only if user is authenticated
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated, IsPatientUser)
+    serializer_class = RecordsSerializer
+
+    filter_backends = (filters.OrderingFilter,)
+    filterset_fields = ("height",)
+    ordering_fields = ("height", "created_on")
+    queryset = PatientRecord.objects.all()
+
+    # queryset = queryset.filter(height=180,)
     """
     List all patient records or add new record
     """
 
-    def get(self, request, format=None):
-        record = PatientRecord.objects.all()
-        serializer = RecordsSerializer(record, many=True)
-        return Response(serializer.data)
+    # def get(self, request, format=None):
+    #     record = PatientRecord.objects.all()
+    #     serializer = RecordsSerializer(record, many=True)
+    #     return Response(serializer.data)
 
     def post(self, request, format=None):
+        userid = request.user.id
+        data = request.data
         if type(request.data) == list:
-            serializer = RecordsSerializer(data=request.data, many=True)
+            for d in data:
+                d["user"] = userid
+            serializer = RecordsSerializer(data=data, many=True)
         else:
-            serializer = RecordsSerializer(data=request.data)
+            data["user"] = userid
+            serializer = RecordsSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -50,7 +70,7 @@ class all_patient_records(APIView):
 class patient_record(APIView):
 
     # Allow for requests only if user is authenticated
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated, IsPatientUser)
     """
     Retrieve, update or delete a record instance.
     """
@@ -83,7 +103,7 @@ class patient_record(APIView):
 class patient_records_byusername(APIView):
 
     # Allow for requests only if user is authenticated
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated, IsAdminUser)
     """
     Retrieve, update or delete a record instance.
     """
