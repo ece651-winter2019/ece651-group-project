@@ -92,33 +92,10 @@ REST_FRAMEWORK = {
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-<<<<<<< HEAD
-#if (
-#    "test" in sys.argv or "test_coverage" in sys.argv
-#):  # Covers regular testing and django-coverage
-=======
-#if "test" in sys.argv or "test_coverage" in sys.argv:
-#    # Covers regular testing and django-coverage
->>>>>>> 486ebb9366b720cb0aee25c8a8c448d74fd23f9a
-#    DATABASES = {"default": {"ENGINE": "django.db.backends.sqlite3"}}
-#else:
-#    DATABASES = {"default": {"ENGINE": "mysql.connector.django"}}
-#    # Activate Django-Heroku.
-#    django_heroku.settings(locals())
-#    del DATABASES["default"]["OPTIONS"]["sslmode"]
-#    DATABASES["default"]["ENGINE"] = "mysql.connector.django"
-
-<<<<<<< HEAD
-
 DATABASES = {"default": {"ENGINE": "django.db.backends.sqlite3"}}
-=======
-    DATABASES = {"default": {"ENGINE": "mysql.connector.django"}}
-    # Activate Django-Heroku.
-    django_heroku.settings(locals())
-    del DATABASES["default"]["OPTIONS"]["sslmode"]
-    DATABASES["default"]["ENGINE"] = "mysql.connector.django"
 
->>>>>>> 486ebb9366b720cb0aee25c8a8c448d74fd23f9a
+
+# DATABASES = {"default": {"ENGINE": "mysql.connector.django"}}
 
 
 # Password validation

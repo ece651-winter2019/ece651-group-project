@@ -4,13 +4,14 @@ from users.models import CustomUser
 from django.conf import settings
 
 # Create your tests here.
-#settings.configure()
+# settings.configure()
+
 
 class ProfileModelClass(TestCase):
     @classmethod
     def setUpTestData(cls):
         # Set up non-modified objects used by all test methods
-        Profile.objects.create(user_id = 1,license_no=123, practice_name="health clinic")
+        Profile.objects.create(user_id=1, license_no=123, practice_name="health clinic")
         CustomUser.objects.create(is_doctor=True)
 
     def test_practice_name_label(self):

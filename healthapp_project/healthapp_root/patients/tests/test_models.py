@@ -1,11 +1,11 @@
-#from django.test import TestCase
-#from doctors.models import Profile
-#from users.models import CustomUser
+# from django.test import TestCase
+# from doctors.models import Profile
+# from users.models import CustomUser
 #
 ## Create your tests here.
 #
 #
-#class ProfileModelClass(TestCase):
+# class ProfileModelClass(TestCase):
 #    @classmethod
 #    def setUpTestData(cls):
 #        # Set up non-modified objects used by all test methods

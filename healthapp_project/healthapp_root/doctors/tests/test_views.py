@@ -1,12 +1,12 @@
-#from django.test import TestCase
-#from django.urls import reverse
-#import datetime
-#from django.utils import timezone
+# from django.test import TestCase
+# from django.urls import reverse
+# import datetime
+# from django.utils import timezone
 #
-#from doctors.views import DoctorSignUpView
+# from doctors.views import DoctorSignUpView
 #
 #
-#class DoctorSignUpViewTest(TestCase):
+# class DoctorSignUpViewTest(TestCase):
 #    @classmethod
 #    def get_context_data_Test(self):
 #        time = timezone.now() + datetime.timedelta(days=30)
