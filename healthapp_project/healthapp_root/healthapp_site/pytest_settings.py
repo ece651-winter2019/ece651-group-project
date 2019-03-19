@@ -93,18 +93,7 @@ REST_FRAMEWORK = {
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
 
-if("test" in sys.argv or "test_coverage" in sys.argv):
-    # Covers regular testing and django-coverage
-    DATABASES = {"default": {"ENGINE": "django.db.backends.sqlite3"}}
-else:
-    DATABASES = {"default": {"ENGINE": "mysql.connector.django"}}
-    # Activate Django-Heroku.
-    django_heroku.settings(locals())
-    del DATABASES["default"]["OPTIONS"]["sslmode"]
-    DATABASES["default"]["ENGINE"] = "mysql.connector.django"
-
-
-#DATABASES = {"default": {"ENGINE": "django.db.backends.sqlite3"}}
+DATABASES = {"default": {"ENGINE": "django.db.backends.sqlite3"}}
 
 
 # Password validation
