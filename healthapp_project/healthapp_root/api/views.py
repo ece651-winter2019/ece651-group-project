@@ -12,10 +12,11 @@ from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
-from rest_framework import filters
 
-# import django filters
-from django_filters.rest_framework import DjangoFilterBackend
+
+# import rest framework and django filters
+import rest_framework_filters as filters
+import django_filters
 
 # import serializers
 from api.serializers import RecordsSerializer
@@ -30,26 +31,28 @@ from patients.models import Profile as PatProfile
 from doctors.models import Profile as DocProfile
 from users.models import CustomUser
 
-# @csrf_exempt
+
+class DateTimeFilter(filters.FilterSet):
+    created_date = filters.DateTimeFilter(field_name="created_on")
+
+    class Meta:
+        model = PatientRecord
+        fields = {"created_on": ["gte", "lte", "gt", "lt"]}
+
+
 class all_patient_records(ListAPIView):
     # Allow for requests only if user is authenticated
     permission_classes = (IsAuthenticated, IsPatientUser)
     serializer_class = RecordsSerializer
 
-    filter_backends = (filters.OrderingFilter,)
-    filterset_fields = ("height",)
-    ordering_fields = ("height", "created_on")
+    # Added filters to this view
+    ordering_fields = "created_on"
+    filter_class = DateTimeFilter
     queryset = PatientRecord.objects.all()
 
-    # queryset = queryset.filter(height=180,)
     """
     List all patient records or add new record
     """
-
-    # def get(self, request, format=None):
-    #     record = PatientRecord.objects.all()
-    #     serializer = RecordsSerializer(record, many=True)
-    #     return Response(serializer.data)
 
     def post(self, request, format=None):
         userid = request.user.id
