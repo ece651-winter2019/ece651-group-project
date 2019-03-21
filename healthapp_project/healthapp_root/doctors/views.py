@@ -5,6 +5,10 @@ from users.models import CustomUser
 from patients.models import Profile as PatProfile
 from .forms import DoctorSignUpForm
 
+# TBD if these imports needeed
+from rest_framework.permissions import IsAuthenticated
+from api.permissions import IsDoctorUser
+
 
 class DoctorSignUpView(generic.CreateView):
     model = CustomUser
@@ -22,6 +26,9 @@ class DoctorSignUpView(generic.CreateView):
 
 
 class DoctorDashboard(generic.ListView):
+
+    # Permissions??
+
     context_object_name = "patient_list"
     template_name = "dashboard.html"
 
@@ -35,10 +42,33 @@ class DoctorDashboard(generic.ListView):
 
     def get_context_data(self, **kwargs):
         """
-        This will allow you to add additional fields to the conext object that is sent to the view
+        This will allow you to add additional fields to the context object that is sent to the view
         """
         context = super(DoctorDashboard, self).get_context_data(**kwargs)
         # context['patient_data'] = Hotel.objects.all().order_by('star').reverse()[:3]
+        return context
+
+
+class DoctorDashboardPatientProfile(generic.ListView):
+
+    # Permissions??
+
+    context_object_name = "patient_list"
+    template_name = "patient_profile.html"
+
+    def get_queryset(self):
+        """
+        This will return the default query set for the class when the view method is called
+        """
+
+        print(f"DOCTOR IS {self.request.user.id}")
+        return PatProfile.objects.filter(doctor_id=self.request.user.id).all()
+
+    def get_context_data(self, **kwargs):
+        """
+        This will allow you to add additional fields to the context object that is sent to the view
+        """
+        context = super(DoctorDashboardPatientProfile, self).get_context_data(**kwargs)
         return context
 
     # def get_queryset(self):
