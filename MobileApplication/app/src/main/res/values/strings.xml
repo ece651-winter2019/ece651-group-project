@@ -1,22 +1,28 @@
 <resources>
-    <string name="app_name">MobileApplication</string>
+    <string name="app_name">MobiHealthApplication</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">ECE651 Group Project Team</string>
+    <string name="nav_header_subtitle">University of Waterloo</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_login">Login</string>
+    <string name="action_exit">Exit</string>
+    <string name="title_activity_login">Sign in</string>
     <!-- Strings related to login -->
-    <string name="prompt_username">UserName</string>
+    <string name="title_activity_DataInput">Data Input</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_username">Username</string>
     <string name="prompt_password">Password</string>
     <string name="prompt_systolic">Systolic</string>
     <string name="prompt_diastolic">Diastolic</string>
-    <string name="prompt_heart_rate">HeartRate</string>
-    <string name="action_sign_in">Submit</string>
-    <string name="action_sign_in_short">Submit</string>
-    <string name="error_invalid_username">This User name is invalid</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="action_submit">Submit</string>
+    <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing username
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
-    <string name="fetch_text">Fetch</string>
-    <string name="clear_text">Clear</string>
-    <string name="connection_error">Connection error.</string>
-    <string name="fetch_cancelled">Fetch cancelled.</string>
 </resources>
