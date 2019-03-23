@@ -4,49 +4,133 @@
 {% block title %}Dashboard{% endblock %}
 
 {% comment %}
-{% block content %}
-{% if user.is_authenticated %}
-  {% if user.is_doctor %}
-      <h2>Patients</h2>
-      <ul>
-        <p>List of Patients:</p>
-          {% for patient in patient_list %}
-              <li>{{ patient.user.first_name}} {{patient.user.last_name }} ID: {{patient.user_id}}</li>
-          {% endfor %}
-      </ul>
-  {% endif %}
-{% endif %}
-{% endblock %}
- {% endcomment %}
+  {% block content %}
+    {% if user.is_authenticated %}
+      {% if user.is_doctor %}
+          <h2>Patients</h2>
+          <ul>
+            <p>List of Patients:</p>
+              {% for patient in patient_list %}
+                  <li>{{ patient.user.first_name}} {{patient.user.last_name }} ID: {{patient.user_id}}</li>
+              {% endfor %}
+          </ul>
+      {% endif %}
+    {% endif %}
+  {% endblock %}
+{% endcomment %}
+
+{% comment %} {% include 'classroom/students/_header.html' with active='new' %} {% endcomment %}
+  
+{% comment %}
+<div class="card">
+  <table class="table mb-0">
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>ID</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for patient in patient_list %}
+        <tr>
+          <td class="align-middle">{{ patient.user.first_name }}</td>
+          <td class="align-middle">{{ patient.user.last_name }}</td>
+          <td class="align-middle">{{ patient.user_id }} </td>
+          <td class="text-right">
+            <a href="{% url 'home' %}" class="btn btn-primary">View Records</a>
+          </td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td class="bg-light text-center font-italic" colspan="4">No Patients</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endcomment %}
 
 {% block content %}
-  {% comment %} {% include 'classroom/students/_header.html' with active='new' %} {% endcomment %}
-  <div class="card">
-    <table class="table mb-0">
-      <thead>
-        <tr>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>ID</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for patient in patient_list %}
-          <tr>
-            <td class="align-middle">{{ patient.user.first_name }}</td>
-            <td class="align-middle">{{ patient.user.last_name }}</td>
-            <td class="align-middle">{{ patient.user_id }} </td>
-            <td class="text-right">
-              <a href="{% url 'home' %}" class="btn btn-primary">View Records</a>
-            </td>
-          </tr>
-        {% empty %}
-          <tr>
-            <td class="bg-light text-center font-italic" colspan="4">No Patients</td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+
+  <div class="container">
+
+    <div class="py-5 text-center">
+      <h2>My patients</h2>
+      <p class="lead">Below is the list of the patients you are monitoring</p>
+    </div>
+  
+    {% for patient in patient_list %}
+    
+    <div class="card-body shadow-sm bg-light mb-4">  
+      <div class="order-md-2 mb-4">
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+          <span class="text-dark">{{ patient.user.first_name }} {{ patient.user.last_name }}</span>
+          <form class="card p-2">
+            <div class="input-group">
+              <div class="input-group-append">
+                <button type="submit" class="btn btn-secondary">View Records</button>
+              </div>
+            </div>
+          </form>
+        </h4>
+        <ul class="list-group mb-3">
+          <li class="list-group-item d-flex justify-content-between lh-condensed">
+            <div>
+              <h6 class="my-0">ID</h6>
+            </div>
+            <span class="text-muted">{{ patient.user_id }}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between lh-condensed">
+            <div>
+              <h6 class="my-0">Phone</h6>
+            </div>
+            <span class="text-muted">{{ patient.user.phone_no }}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between lh-condensed">
+            <div>
+              <h6 class="my-0">Address</h6>    
+            </div>
+            <span class="text-muted">{{ patient.user.street }}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between lh-condensed">
+            <div>
+              <h6 class="my-0">City</h6>
+            </div>
+            <span class="text-muted">{{ patient.user.city }}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between lh-condensed">
+              <div>
+                <h6 class="my-0">State</h6>
+              </div>
+            <span class="text-muted">{{ patient.user.state }}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between lh-condensed">
+              <div>
+                <h6 class="my-0">Postal code</h6>
+              </div>
+            <span class="text-muted">{{ patient.user.postal_code }}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between lh-condensed">
+              <div>
+                <h6 class="my-0">Country</h6>
+              </div>
+            <span class="text-muted">{{ patient.user.country }}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  
+    {% empty %}
+    <p class="lead">Oops, looks like you have no patients assigned yet!</p>
+    {% endfor %}
+
+    <footer class="text-muted">
+      <div class="container text-center">
+        <p>&copy HealthApp 2019</p>
+    </footer>
+  
   </div>
+
 {% endblock %}
