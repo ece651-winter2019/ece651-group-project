@@ -1,22 +1,21 @@
-package ca.uw.ece.mobileapplication;
+package ca.uw.tongliu.mobihealthapplication;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.IOException;
 
-import java.util.HashMap;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
+import javax.net.ssl.HttpsURLConnection;
 import java.net.URL;
 
 
 public class HttpComm {
 
-    private String baseUrl = "http://192.168.92.210:6543/";
+    private String baseUrl = "https://pyramid-backend.herokuapp.com/";
     private String data1;
     private String data2;
     private String data3;
@@ -25,13 +24,12 @@ public class HttpComm {
     private String urlPath;
     private String lastResponse;
     private JSONObject jsonObject;
+    private String token = null;
 
     /**
      *
-     * @param baseUrl String
-     * @param data1 String
-     * @param data2 String
      * @param httpmethod String
+     * @param jsonObjectData JSONObject
      */
     public HttpComm(String httpmethod, JSONObject jsonObjectData) {
         this.baseUrl = baseUrl;
@@ -44,7 +42,18 @@ public class HttpComm {
         System.setProperty("jsse.enableSNIExtension", "false");
     }
 
-    private void setPostRequestContent(HttpURLConnection conn, JSONObject jsonObject) throws IOException {
+    public HttpComm(String httpmethod) {
+        this.baseUrl = "";
+        this.urlResource = "";
+        this.urlPath = "";
+        this.httpMethod = httpmethod;
+        lastResponse = "";
+        jsonObject = null;
+        // This is important. The application may break without this line.
+        System.setProperty("jsse.enableSNIExtension", "false");
+    }
+
+    private void setPostRequestContent(HttpsURLConnection conn, JSONObject jsonObject) throws IOException {
         conn.setDoInput(true);
         conn.setDoOutput(true);
 
@@ -56,7 +65,7 @@ public class HttpComm {
         os.close();
     }
 
-    private void settingGetContent(HttpURLConnection conn) {
+    private void settingGetContent(HttpsURLConnection conn) {
         // Timeout for reading InputStream arbitrarily set to 3000ms.
         conn.setReadTimeout(3000);
         // Timeout for connection.connect() arbitrarily set to 3000ms.
@@ -64,16 +73,22 @@ public class HttpComm {
         conn.setDoInput(true);
     }
 
+    public void setAuthToken(String token){
+        this.token = token;
+    }
+
     public String httpAPI() throws IOException, JSONException {
         String result = "";
         StringBuilder outputStringBuilder = new StringBuilder();
 
-        URL url = new URL(baseUrl+urlResource);
+        URL url = new URL(baseUrl+urlResource+urlPath);
 
         // 1. create HttpURLConnection
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
         conn.setRequestMethod(httpMethod);
         conn.setRequestProperty("Content-Type", "application/json; charset=utf-8");
+        if ( token != null)
+            conn.setRequestProperty ("Authorization","Token "+ token);
 
         if ( httpMethod.equals("POST")) {
             // 2. build JSON object

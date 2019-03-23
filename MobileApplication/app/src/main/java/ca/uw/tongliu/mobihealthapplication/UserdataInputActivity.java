@@ -1,8 +1,9 @@
-package ca.uw.ece.mobileapplication;
+package ca.uw.tongliu.mobihealthapplication;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import androidx.fragment.app.FragmentActivity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -13,7 +14,14 @@ import android.widget.TextView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.File;
+import java.io.InputStreamReader;
+import java.util.Date;
 
 /**
  * A User data input screen.
@@ -29,9 +37,14 @@ public class UserdataInputActivity extends FragmentActivity {
     private EditText mSystolicView;
     private EditText mDiastolicView;
     private EditText mHeartrateView;
+    private EditText mHeightView;
+    private EditText mWeightView;
     private String systolic;
     private String diastolic;
     private String heartrate;
+    private String height;
+    private String weight;
+
     private String httpmethod;
     private HttpComm http_comm;
     private  JSONObject jsondata;
@@ -42,11 +55,14 @@ public class UserdataInputActivity extends FragmentActivity {
         setContentView(R.layout.data_input);
         // Set up the Data input form.
         mSystolicView = (EditText) findViewById(R.id.systolic);
-        populateAutoComplete();
 
         mDiastolicView = (EditText) findViewById(R.id.diastolic);
 
         mHeartrateView = (EditText) findViewById(R.id.Heartrate);
+
+        mHeightView = (EditText) findViewById(R.id.Height);
+        mWeightView = (EditText) findViewById(R.id.Weight);
+
         mDiastolicView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -67,34 +83,28 @@ public class UserdataInputActivity extends FragmentActivity {
                     systolic = mSystolicView.getText().toString();
                     diastolic = mDiastolicView.getText().toString();
                     heartrate = mHeartrateView.getText().toString();
-                    //baseUrl = "http://192.168.92.210:6543/";
+                    height  = mHeightView.getText ().toString ();
+                    weight = mWeightView.getText ().toString ();
                     httpmethod = "POST";
 
                     jsondata = buidJsonObject();
+                    String token = ReadDataFromLocalFile("auth_token");
+
                     HttpComm http_comm = new HttpComm(
                             httpmethod
                             ,jsondata
                     );
 
-                    http_comm.setUrlResource("records");
-                    //http_comm.setUrlPath("tliu");
+                    http_comm.setUrlResource("api/");
+                    http_comm.setUrlPath("patientrecords");
+                    http_comm.setAuthToken (token);
                     AsyncTask<String, Void, String> execute = new ExecuteNetworkOperation(http_comm);
                     execute.execute();
 
                 } catch (Exception ex) {
                 }
             }
-/*
-            attemptLogin();
-                //mNetworkFragment.startDownload();
 
-                if (!mDownloading && mNetworkFragment != null) {
-                        // Execute the async download.
-                        mNetworkFragment.startDownload();
-                        mDownloading = true;
-                }
-            }
-*/
         });
 
         mDataText = (TextView) findViewById(R.id.data_text);
@@ -104,29 +114,27 @@ public class UserdataInputActivity extends FragmentActivity {
     private JSONObject buidJsonObject() throws JSONException {
 
         JSONObject jsonObject = new JSONObject();
-        jsonObject.accumulate("systolic",systolic);
-        jsonObject.accumulate("diastolic",diastolic);
-        jsonObject.accumulate("heartrate",heartrate);
+        jsonObject.accumulate("bp_systolic",systolic);
+        jsonObject.accumulate("bp_diastolic",diastolic);
+        jsonObject.accumulate("heart_rate",heartrate);
+        jsonObject.accumulate("height",height);
+        jsonObject.accumulate("weight",weight);
 
         return jsonObject;
     }
 
-    private void populateAutoComplete() {
-        return;
-    }
-
-    /**
+     /**
      * This subclass handles the network operations in a new thread.
      * It starts the progress bar, makes the API call, and ends the progress bar.
      */
 
     private class ExecuteNetworkOperation extends AsyncTask<String, Void, String> {
-        HttpComm signup_http_comm;
+        HttpComm data_input_http_comm;
         /**
          * Overload the constructor to pass objects to this class.
          */
         public ExecuteNetworkOperation(HttpComm http_comm) {
-            this.signup_http_comm = http_comm;
+            this.data_input_http_comm = http_comm;
         }
 
         @Override
@@ -134,7 +142,7 @@ public class UserdataInputActivity extends FragmentActivity {
             // params comes from the execute() call: params[0] is the url.
             try {
                 try {
-                    return signup_http_comm.httpAPI();
+                    return data_input_http_comm.httpAPI();
                 } catch (JSONException e) {
                     return "Error!";
                 }
@@ -149,6 +157,36 @@ public class UserdataInputActivity extends FragmentActivity {
         }
     }
 
+    private String ReadDataFromLocalFile(String filename)
+    {
+        StringBuffer file_contents = new StringBuffer ();
+        String lineData="";
+        File file = new File(getFilesDir(), filename);
 
+        FileInputStream fileInputStream = null;
+
+        try {
+            fileInputStream = new FileInputStream(file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace ( );
+        }
+
+        if ( fileInputStream != null){
+            InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+            try {
+                lineData = bufferedReader.readLine();
+                while(lineData!=null){
+                    file_contents.append (lineData);
+                    lineData = bufferedReader.readLine();
+                }
+
+            } catch (IOException e) {
+                e.printStackTrace ( );
+            }
+        }
+        return file_contents.toString ();
+    }
 }
 

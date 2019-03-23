@@ -1,4 +1,4 @@
-package ca.uw.ece.mobileapplication;
+package ca.uw.tongliu.mobihealthapplication;
 
 import org.junit.Test;
 
@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-public class MyUnitTest {
+public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() {
         assertEquals(4, 2 + 2);

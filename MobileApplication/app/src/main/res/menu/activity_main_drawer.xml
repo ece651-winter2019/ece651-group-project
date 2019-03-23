@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_login"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Login To Server"/>
+        <item
+            android:id="@+id/nav_data_sync"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Sync Data With Cloud Server"/>
+        <item
+            android:id="@+id/nav_manual_input"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Manual Data Input"/>
+        <item
+            android:id="@+id/nav_data_list"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="User Data List"/>
+        <item
+            android:id="@+id/nav_show_graph"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="User Data Plot"/>
+    </group>
+
+</menu>
