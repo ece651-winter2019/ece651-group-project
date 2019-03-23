@@ -1,14 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
     defaultConfig {
-        applicationId "ca.uw.ece.mobileapplication"
-        minSdkVersion 23
-        targetSdkVersion 27
+        applicationId "ca.uw.tongliu.mobihealthapplication"
+        minSdkVersion 25
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -16,14 +16,33 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.android.support:design:27.1.1'
+    implementation 'androidx.appcompat:appcompat:1.0.0-beta01'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0-beta01'
+    implementation 'com.google.android.material:material:1.0.0-beta01'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
+
+    implementation "androidx.room:room-runtime:2.1.0-alpha04"
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0-beta01'
+    implementation 'com.google.android.gms:play-services-plus:16.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0-beta01'
+    annotationProcessor "androidx.room:room-compiler:2.1.0-alpha04"
+    // For Kotlin use kapt instead of annotationProcessor
+    implementation 'com.jjoe64:graphview:4.2.2'
+
+    // optional - RxJava support for Room
+    implementation "androidx.room:room-rxjava2:2.1.0-alpha04"
+
+    // Test helpers
+    testImplementation "androidx.room:room-testing:2.1.0-alpha04"
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    androidTestImplementation 'com.android.support.test:rules:1.0.2'
+    androidTestImplementation 'androidx.test:runner:1.1.0-alpha4'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha4'
 }

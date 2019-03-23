@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/TextFirst"
+        android:layout_width="78dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="First"/>
+
+    <TextView
+        android:id="@+id/TextSecond"
+        android:layout_width="2dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Second"/>
+
+    <TextView
+        android:id="@+id/TextThird"
+        android:layout_width="8dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Third"/>
+
+    <TextView
+        android:id="@+id/TextFourth"
+        android:layout_width="5dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Fourth"/>
+
+    <TextView
+        android:id="@+id/TextFifth"
+        android:layout_width="2dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Fifth"/>
+</LinearLayout>
