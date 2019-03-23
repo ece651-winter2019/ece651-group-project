@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils import timezone
 from django.conf import settings
+from django import forms
+from users.models import CustomUser
 
 
 class Profile(models.Model):

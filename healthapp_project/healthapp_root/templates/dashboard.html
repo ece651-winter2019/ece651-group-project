@@ -38,7 +38,7 @@
             <td class="align-middle">{{ patient.user.last_name }}</td>
             <td class="align-middle">{{ patient.user_id }} </td>
             <td class="text-right">
-              <a href="{% url 'patient_profile' %}" class="btn btn-primary">View Records</a>
+              <a href="/dashboard/patient_records/{{patient.user_id}}" class="btn btn-primary">View Records</a>
             </td>
           </tr>
         {% empty %}

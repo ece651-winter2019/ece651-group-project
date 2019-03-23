@@ -25,25 +25,30 @@
     <table class="table mb-0">
       <thead>
         <tr>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>ID</th>
+          <th>Date & Time</th>
+          <th>Systolic BP</th>
+          <th>Diastolic BP</th>
+          <th>Heart Rate (per 60 sec)</th>
+          <th>Weight (lbs)</th>
+          <th>Height (cm)</th>
+          <th>Patient</th>
           <th></th>
         </tr>
       </thead>
       <tbody>
-        {% for patient in patient_list %}
+        {% for record in patient_record_list %}
           <tr>
-            <td class="align-middle">{{ patient.user.first_name }}</td>
-            <td class="align-middle">{{ patient.user.last_name }}</td>
-            <td class="align-middle">{{ patient.user_id }} </td>
-            <td class="text-right">
-              <a href="{% url 'home' %}" class="btn btn-primary">View Record</a>
-            </td>
+            <td class="align-middle">{{ record.created_on }}</td>
+            <td class="align-middle">{{ record.bp_systolic }}</td>
+            <td class="align-middle">{{ record.bp_diastolic }} </td>
+            <td class="align-middle">{{ record.heart_rate }} </td>
+            <td class="align-middle">{{ record.weight }} </td>
+            <td class="align-middle">{{ record.height }} </td>
+            <td class="align-middle">{{ record.user }} </td>
           </tr>
         {% empty %}
           <tr>
-            <td class="bg-light text-center font-italic" colspan="4">No Patients</td>
+            <td class="bg-light text-center font-italic" colspan="4">No Records</td>
           </tr>
         {% endfor %}
       </tbody>

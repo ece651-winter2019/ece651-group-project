@@ -111,14 +111,11 @@ class patient_records_byusername(APIView):
     Retrieve, update or delete a record instance.
     """
 
-    # def get(self, request, user_id, format=None):
-    #     print(username)
-    #     return Response(status=status.HTTP_204_NO_CONTENT)
     def get_object(self, username):
         try:
             userid = CustomUser.objects.get(username=username).id
 
-            return PatientRecord.objects.filter(patient_id=userid).all()
+            return PatientRecord.objects.filter(user_id=userid).all()
         except CustomUser.DoesNotExist:
             raise Http404
         except PatientRecord.DoesNotExist:
