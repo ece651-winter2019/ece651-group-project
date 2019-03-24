@@ -3,7 +3,15 @@ from django.contrib.auth import login
 from django.views import generic
 from users.models import CustomUser
 from patients.models import Profile as PatProfile
+from patients.models import Record as PatRecord
 from .forms import DoctorSignUpForm
+from doctors.models import Profile as DocProfile
+from django.contrib.auth.mixins import (
+    LoginRequiredMixin,
+    PermissionRequiredMixin,
+    UserPassesTestMixin,
+)
+from django.contrib import messages
 
 
 class DoctorSignUpView(generic.CreateView):
@@ -21,7 +29,10 @@ class DoctorSignUpView(generic.CreateView):
         return redirect("home")
 
 
-class DoctorDashboard(generic.ListView):
+class DoctorDashboard(LoginRequiredMixin, UserPassesTestMixin, generic.ListView):
+    def test_func(self):
+        return self.request.user.is_doctor
+
     context_object_name = "patient_list"
     template_name = "dashboard.html"
 
@@ -30,25 +41,40 @@ class DoctorDashboard(generic.ListView):
         This will return the default query set for the class when the view method is called
         """
 
-        print(f"DOCTOR IS {self.request.user.id}")
         return PatProfile.objects.filter(doctor_id=self.request.user.id).all()
 
     def get_context_data(self, **kwargs):
         """
-        This will allow you to add additional fields to the conext object that is sent to the view
+        This will allow you to add additional fields to the context object that is sent to the view
         """
         context = super(DoctorDashboard, self).get_context_data(**kwargs)
-        # context['patient_data'] = Hotel.objects.all().order_by('star').reverse()[:3]
         return context
 
-    # def get_queryset(self):
-    #     user = self.request.user
-    #     self.publisher = get_object_or_404(Publisher, name=self.kwargs['publisher'])
-    #     return Book.objects.filter(publisher=self.publisher)
 
-    # def get(self, request, format=None):
-    #     return Response(serializer.data)
+class DoctorDashboardPatientProfile(
+    LoginRequiredMixin, UserPassesTestMixin, generic.ListView
+):
 
-    # def get_context_data(self, **kwargs):
-    #     kwargs["user_type"] = "Doctor"
-    #     return super().get_context_data(**kwargs)
+    # Check if doctor has permission to this specific user
+    def test_func(self):
+        patient_id = self.kwargs.get("userid")
+        return (
+            PatProfile.objects.get(user_id=patient_id).doctor_id == self.request.user.id
+        )
+
+    context_object_name = "patient_record_list"
+    template_name = "patient_profile.html"
+
+    def get_queryset(self):
+        """
+        This will return the default query set for the class when the view method is called
+        """
+        userid = self.kwargs.get("userid")
+        return PatRecord.objects.filter(user_id=userid).all()
+
+    def get_context_data(self, **kwargs):
+        """
+        This will allow you to add additional fields to the context object that is sent to the view
+        """
+        context = super(DoctorDashboardPatientProfile, self).get_context_data(**kwargs)
+        return context

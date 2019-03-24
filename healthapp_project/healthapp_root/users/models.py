@@ -4,8 +4,8 @@ from django.db import models
 
 class CustomUser(AbstractUser):
     # add additional fields in here
-    is_doctor = models.BooleanField(default=False)
-    is_patient = models.BooleanField(default=False)
+    is_doctor = models.NullBooleanField(default=False)
+    is_patient = models.NullBooleanField(default=False)
     first_name = models.CharField(max_length=20, null=False)
     last_name = models.CharField(max_length=20, null=False)
     phone_no = models.CharField(max_length=10, null=False)

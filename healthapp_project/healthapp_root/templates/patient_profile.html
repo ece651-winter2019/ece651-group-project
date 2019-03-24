@@ -1,0 +1,57 @@
+<!-- templates/home.html -->
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Dashboard{% endblock %}
+
+{% comment %}
+{% block content %}
+{% if user.is_authenticated %}
+  {% if user.is_doctor %}
+      <h2>Patients</h2>
+      <ul>
+        <p>List of Patients:</p>
+          {% for patient in patient_list %}
+              <li>{{ patient.user.first_name}} {{patient.user.last_name }} ID: {{patient.user_id}}</li>
+          {% endfor %}
+      </ul>
+  {% endif %}
+{% endif %}
+{% endblock %}
+ {% endcomment %}
+
+{% block content %}
+  {% comment %} {% include 'classroom/students/_header.html' with active='new' %} {% endcomment %}
+  <div class="card">
+    <table class="table mb-0">
+      <thead>
+        <tr>
+          <th>Date & Time</th>
+          <th>Systolic BP</th>
+          <th>Diastolic BP</th>
+          <th>Heart Rate (per 60 sec)</th>
+          <th>Weight (lbs)</th>
+          <th>Height (cm)</th>
+          <th>Patient</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for record in patient_record_list %}
+          <tr>
+            <td class="align-middle">{{ record.created_on }}</td>
+            <td class="align-middle">{{ record.bp_systolic }}</td>
+            <td class="align-middle">{{ record.bp_diastolic }} </td>
+            <td class="align-middle">{{ record.heart_rate }} </td>
+            <td class="align-middle">{{ record.weight }} </td>
+            <td class="align-middle">{{ record.height }} </td>
+            <td class="align-middle">{{ record.user }} </td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td class="bg-light text-center font-italic" colspan="4">No Records</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
