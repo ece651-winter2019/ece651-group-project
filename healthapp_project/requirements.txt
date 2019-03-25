@@ -20,6 +20,8 @@ Pygments==2.3.1
 pytest==4.3.0
 pytest-cov==2.6.1
 pytest-django==3.4.8
+pytest-html==1.20.0
+pytest-metadata==1.8.0
 pytz==2018.9
 six==1.12.0
 whitenoise==4.1.2
