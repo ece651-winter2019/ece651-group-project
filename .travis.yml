@@ -42,6 +42,7 @@ matrix:
         - pip install --upgrade pip setuptools
         - pip install -r requirements.txt
       # command to run tests
+      before_script: cd healthapp_root
       script:
         - pytest
 

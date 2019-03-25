@@ -1,28 +1,38 @@
 from django.test import TestCase
+from doctors.models import Profile
+from users.models import CustomUser
+from django.conf import settings
 
 # Create your tests here.
+# settings.configure()
 
 
-class YourTestClass(TestCase):
+class ProfileModelClass(TestCase):
     @classmethod
     def setUpTestData(cls):
-        print(
-            "setUpTestData: Run once to set up non-modified data for all class methods."
-        )
-        pass
+        # Set up non-modified objects used by all test methods
+        Profile.objects.create(user_id=1, license_no=123, practice_name="health clinic")
+        CustomUser.objects.create(is_doctor=True)
 
-    def setUp(self):
-        print("setUp: Run once for every test method to setup clean data.")
-        pass
+    def test_practice_name_label(self):
+        # Get a profile object to test
+        profile = Profile.objects.get(user_id=1)
+        # Get the metadata for the required field and use it to query the required field data
+        field_label = profile._meta.get_field("practice_name").verbose_name
+        # Compare the value to the expected result
+        self.assertEquals(field_label, "practice name")
 
-    def test_false_is_false(self):
-        print("Method: test_false_is_false.")
-        self.assertFalse(False)
+    def test_license_no_label(self):
+        profile = Profile.objects.get(user_id=1)
+        field_label = profile._meta.get_field("license_no").verbose_name
+        self.assertEquals(field_label, "license no")
 
-    def test_false_is_true(self):
-        print("Method: test_false_is_true.")
-        self.assertTrue(False)
+    def test_practice_name_max_length(self):
+        profile = Profile.objects.get(user_id=1)
+        max_length = profile._meta.get_field("practice_name").max_length
+        self.assertEquals(max_length, 20)
 
-    def test_one_plus_one_equals_two(self):
-        print("Method: test_one_plus_one_equals_two.")
-        self.assertEqual(1 + 1, 2)
+    def test_license_no_max_length(self):
+        profile = Profile.objects.get(user_id=1)
+        max_length = profile._meta.get_field("license_no").max_length
+        self.assertEquals(max_length, 20)
