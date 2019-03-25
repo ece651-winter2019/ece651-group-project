@@ -3,6 +3,7 @@ package ca.uw.tongliu.mobihealthapplication;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import androidx.annotation.NonNull;
 import com.google.android.material.snackbar.Snackbar;
@@ -28,6 +29,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -362,6 +364,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
 
             if (success) {
+                Context context = getApplicationContext();
+                CharSequence text = "Login Succeed!";
+                int duration = Toast.LENGTH_LONG;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
                 finish();
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
