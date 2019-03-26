@@ -10,6 +10,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -85,16 +86,16 @@ public class UserdataInputActivity extends FragmentActivity {
                     heartrate = mHeartrateView.getText().toString();
                     height  = mHeightView.getText ().toString ();
                     weight = mWeightView.getText ().toString ();
-                    httpmethod = "POST";
 
                     jsondata = buidJsonObject();
-                    String token = ReadDataFromLocalFile("auth_token");
 
                     HttpComm http_comm = new HttpComm(
-                            httpmethod
-                            ,jsondata
+                            getApplicationContext(),
+                            jsondata
                     );
 
+                    http_comm.setHttpMethod("POST");
+                    String token = http_comm.readDataFromLocalFile("auth_token");
                     http_comm.setUrlResource("api/");
                     http_comm.setUrlPath("patientrecords");
                     http_comm.setAuthToken (token);
@@ -153,40 +154,23 @@ public class UserdataInputActivity extends FragmentActivity {
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String result) {
-            mDataText.setText(result);
-        }
-    }
-
-    private String ReadDataFromLocalFile(String filename)
-    {
-        StringBuffer file_contents = new StringBuffer ();
-        String lineData="";
-        File file = new File(getFilesDir(), filename);
-
-        FileInputStream fileInputStream = null;
-
-        try {
-            fileInputStream = new FileInputStream(file);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace ( );
-        }
-
-        if ( fileInputStream != null){
-            InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
-            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-
-            try {
-                lineData = bufferedReader.readLine();
-                while(lineData!=null){
-                    file_contents.append (lineData);
-                    lineData = bufferedReader.readLine();
-                }
-
-            } catch (IOException e) {
-                e.printStackTrace ( );
+            Context context = getApplicationContext();
+            Toast toast;
+            int duration = Toast.LENGTH_LONG;
+            CharSequence text;
+            if (result != null) {
+                text = "Data Input Succeed!";
+                toast = Toast.makeText(context, text, duration);
+                toast.show();
             }
+            else{
+                text = "Data Input Failed!";
+                toast = Toast.makeText(context, text, duration);
+                toast.show();
+            }
+            finish();
         }
-        return file_contents.toString ();
     }
+
 }
 

@@ -42,13 +42,12 @@ public class MainActivity extends AppCompatActivity
         WebView webView = (WebView) findViewById (R.id.webView);
         webView.loadUrl ("file:///android_asset/heart.html");
 
-        File file = null;
-        file = new File(getFilesDir(), "auth_token");
-        if (file == null){
+/*        DataFileHelper file_helper = new DataFileHelper(getApplicationContext());
+        if (file_helper.isFileExist("auth_token") == false){
             Intent login_intent = new Intent(MainActivity.this, LoginActivity.class );
             startActivity(login_intent);
         }
-
+*/
 
     }
 

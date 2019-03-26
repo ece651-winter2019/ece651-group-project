@@ -3,6 +3,7 @@ package ca.uw.tongliu.mobihealthapplication;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import androidx.annotation.NonNull;
 import com.google.android.material.snackbar.Snackbar;
@@ -28,6 +29,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -49,22 +51,10 @@ import static android.Manifest.permission.READ_CONTACTS;
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
 
     /**
-     * Id to identity READ_CONTACTS permission request.
-     */
-    private static final int REQUEST_READ_CONTACTS = 0;
-
-    /**
-     * A dummy authentication store containing known user names and passwords.
-     * TODO: remove after connecting to a real authentication system.
-     */
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "tliu", "tlkwonca"
-    };
-    /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
     private UserLoginTask mAuthTask = null;
-
+    private final String tokenFilename = "auth_token";
     // UI references.
     private AutoCompleteTextView mUsernameView;
     private EditText mPasswordView;
@@ -77,7 +67,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         setContentView(R.layout.activity_login);
         // Set up the login form.
         mUsernameView = (AutoCompleteTextView) findViewById(R.id.username);
-        populateAutoComplete();
 
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -103,49 +92,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mProgressView = findViewById(R.id.login_progress);
     }
 
-    private void populateAutoComplete() {
-        if (!mayRequestContacts()) {
-            return;
-        }
 
-        getLoaderManager().initLoader(0, null, this);
-    }
-
-    private boolean mayRequestContacts() {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-            return true;
-        }
-        if (checkSelfPermission(READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
-            return true;
-        }
-        if (shouldShowRequestPermissionRationale(READ_CONTACTS)) {
-            Snackbar.make(mUsernameView, R.string.permission_rationale, Snackbar.LENGTH_INDEFINITE)
-                    .setAction(android.R.string.ok, new View.OnClickListener() {
-                        @Override
-                        @TargetApi(Build.VERSION_CODES.M)
-                        public void onClick(View v) {
-                            requestPermissions(new String[]{READ_CONTACTS}, REQUEST_READ_CONTACTS);
-                        }
-                    });
-        } else {
-            requestPermissions(new String[]{READ_CONTACTS}, REQUEST_READ_CONTACTS);
-        }
-        return false;
-    }
-
-    /**
-     * Callback received when a permissions request has been completed.
-     */
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
-        if (requestCode == REQUEST_READ_CONTACTS) {
-            if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                populateAutoComplete();
-            }
-        }
-    }
-    
     private JSONObject buidJsonObject(String username, String password) throws JSONException {
 
         JSONObject jsonObject = new JSONObject();
@@ -206,9 +153,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 
             }
             HttpComm http_comm = new HttpComm(
-                    "POST"
-                    ,json_obj
+                    getApplicationContext(),
+                    json_obj
             );
+            http_comm.setHttpMethod("POST");
             http_comm.setUrlResource("api/token-auth");
             mAuthTask = new UserLoginTask(username, password, http_comm);
             mAuthTask.execute((Void) null);
@@ -343,7 +291,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     try {
                         token = data_input_http_comm.httpAPI ( );
                         json_token = new JSONObject (token.toString ());
-                        saveDataToLocalFile(json_token.getString ("token") );
+                        //saveDataToLocalFile(json_token.getString ("token") );
+                        data_input_http_comm.saveDataToLocalFile(tokenFilename,json_token.getString ("token") );
                         return_val = true;
                     } catch (JSONException e) {
                         return_val = false;
@@ -362,6 +311,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
 
             if (success) {
+                Context context = getApplicationContext();
+                CharSequence text = "Login Succeed!";
+                int duration = Toast.LENGTH_LONG;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
                 finish();
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
@@ -376,31 +331,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
 
     }
-    private void saveDataToLocalFile(String Data)
-    {
-        String filename = "auth_token";
-        File file = new File(getFilesDir(), filename);
 
-        FileOutputStream fileOutputStream = null;
-        try {
-            fileOutputStream = new FileOutputStream (file);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace ( );
-        }
-
-        OutputStreamWriter outputStreamWriter = new OutputStreamWriter(fileOutputStream);
-
-        BufferedWriter bufferedWriter = new BufferedWriter(outputStreamWriter);
-
-        try {
-            bufferedWriter.write(Data);
-            bufferedWriter.flush ();
-            bufferedWriter.close ();
-            outputStreamWriter.close ();
-            fileOutputStream.close ();
-        } catch (IOException e) {
-            e.printStackTrace ( );
-        }
-    }
 }
 
