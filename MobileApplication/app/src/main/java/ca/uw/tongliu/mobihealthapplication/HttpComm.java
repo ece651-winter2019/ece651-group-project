@@ -2,58 +2,59 @@ package ca.uw.tongliu.mobihealthapplication;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import java.io.IOException;
 
+import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import javax.net.ssl.HttpsURLConnection;
+import java.net.HttpURLConnection;
 import java.net.URL;
+import android.content.Context;
 
 
 public class HttpComm {
 
     private String baseUrl = "https://pyramid-backend.herokuapp.com/";
-    private String data1;
-    private String data2;
-    private String data3;
     private String urlResource;
     private String httpMethod; // GET, POST, PUT, DELETE
     private String urlPath;
     private String lastResponse;
     private JSONObject jsonObject;
     private String token = null;
+    private Context activityContext = null;
+    private String httpProtocol = "HTTPS";
 
     /**
      *
-     * @param httpmethod String
+     * @param httpMethod String
      * @param jsonObjectData JSONObject
      */
-    public HttpComm(String httpmethod, JSONObject jsonObjectData) {
+    public HttpComm(Context context, JSONObject jsonObjectData) {
+        this.activityContext = context;
         this.baseUrl = baseUrl;
         this.urlResource = "";
         this.urlPath = "";
-        this.httpMethod = httpmethod;
         lastResponse = "";
         jsonObject = jsonObjectData;
         // This is important. The application may break without this line.
         System.setProperty("jsse.enableSNIExtension", "false");
     }
 
-    public HttpComm(String httpmethod) {
-        this.baseUrl = "";
-        this.urlResource = "";
-        this.urlPath = "";
-        this.httpMethod = httpmethod;
-        lastResponse = "";
-        jsonObject = null;
-        // This is important. The application may break without this line.
-        System.setProperty("jsse.enableSNIExtension", "false");
-    }
-
     private void setPostRequestContent(HttpsURLConnection conn, JSONObject jsonObject) throws IOException {
+        conn.setDoInput(true);
+        conn.setDoOutput(true);
+
+        OutputStream os = conn.getOutputStream();
+        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+        writer.write(jsonObject.toString());
+        writer.flush();
+        writer.close();
+        os.close();
+    }
+    private void setPostRequestContent(HttpURLConnection conn, JSONObject jsonObject) throws IOException {
         conn.setDoInput(true);
         conn.setDoOutput(true);
 
@@ -73,6 +74,18 @@ public class HttpComm {
         conn.setDoInput(true);
     }
 
+    private void settingGetContent(HttpURLConnection conn) {
+        // Timeout for reading InputStream arbitrarily set to 3000ms.
+        conn.setReadTimeout(3000);
+        // Timeout for connection.connect() arbitrarily set to 3000ms.
+        conn.setConnectTimeout(3000);
+        conn.setDoInput(true);
+    }
+
+    public void setProtocol(String http_protocol){
+        httpProtocol = http_protocol;
+    }
+
     public void setAuthToken(String token){
         this.token = token;
     }
@@ -83,8 +96,10 @@ public class HttpComm {
 
         URL url = new URL(baseUrl+urlResource+urlPath);
 
+        HttpURLConnection conn;
         // 1. create HttpURLConnection
-        HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
+        if ( httpProtocol.equals("HTTP")) conn = (HttpURLConnection) url.openConnection();
+        else conn = (HttpsURLConnection) url.openConnection();
         conn.setRequestMethod(httpMethod);
         conn.setRequestProperty("Content-Type", "application/json; charset=utf-8");
         if ( token != null)
@@ -163,5 +178,19 @@ public class HttpComm {
     public String getLastResponse() {
         return lastResponse;
     }
+
+    public void saveDataToLocalFile(String filename ,String Data) {
+        DataFileHelper file_helper = new DataFileHelper(activityContext);
+        file_helper.saveDataToLocalFile(filename, Data);
+    }
+
+    public String readDataFromLocalFile(String filename)
+    {
+        String readin_data;
+        DataFileHelper fileHelper = new DataFileHelper(activityContext);
+        readin_data = fileHelper.readDataFromLocalFile(filename);
+        return readin_data;
+    }
+
 
 }

@@ -36,21 +36,35 @@ public class UserDataGraphActivity extends AppCompatActivity {
 
         WebView webView = (WebView) findViewById (R.id.graphwebview);
         webView.loadUrl ("file:///android_asset/heart2.html");
+        DataPoint generated_data[] = null;
 
-        LineGraphSeries<DataPoint> series0 = new LineGraphSeries<>(generateData(0));
+        generated_data = generateData(0);
+        if ( generated_data == null ){
+            return;
+        }
+
+        LineGraphSeries<DataPoint> series0 = new LineGraphSeries<>(generated_data);
         series0.setTitle("Systolic");
         series0.setColor(Color.argb(255, 255, 0, 0));
         series0.setDrawDataPoints(true);
         series0.setAnimated (true);
         series0.setThickness (10);
         graph.addSeries(series0);
-        LineGraphSeries<DataPoint> series1 = new LineGraphSeries<>(generateData(1));
+        generated_data = generateData(1);
+        if ( generated_data == null ){
+            return;
+        }
+        LineGraphSeries<DataPoint> series1 = new LineGraphSeries<>(generated_data);
         series1.setColor(Color.argb(255, 0, 255, 0));
         series1.setTitle("Diastolic");
         series0.setAnimated (true);
         series0.setThickness (10);
         graph.addSeries(series1);
-        LineGraphSeries<DataPoint> series2 = new LineGraphSeries<>(generateData(2));
+        generated_data = generateData(2);
+        if ( generated_data == null ){
+            return;
+        }
+        LineGraphSeries<DataPoint> series2 = new LineGraphSeries<>(generated_data);
         series2.setColor(Color.argb(255, 0, 0, 255));
         series2.setTitle("Heart Rate");
         series2.setAnimated (true);
@@ -65,7 +79,8 @@ public class UserDataGraphActivity extends AppCompatActivity {
     }
 
     private DataPoint[] generateData(int index) {
-        user_data = ReadDataFromLocalFile();
+        DataFileHelper filehelper = new DataFileHelper(getApplicationContext());
+        user_data = filehelper.readDataFromLocalFile("bpData");
 
         if ( user_data == null)
             return null;
@@ -77,6 +92,9 @@ public class UserDataGraphActivity extends AppCompatActivity {
         }
         double tmp_data = 0.0;
         DataPoint v;
+        if (jsonArray == null){
+            return null;
+        }
         int count = jsonArray.length ( );
         DataPoint[] values = new DataPoint[count];
         try {
@@ -103,35 +121,4 @@ public class UserDataGraphActivity extends AppCompatActivity {
         return values;
     }
 
-    private String ReadDataFromLocalFile() {
-        String filename = "bpData";
-        StringBuffer file_contents = new StringBuffer ( );
-        String lineData = "";
-        File file = new File (getFilesDir ( ), filename);
-
-        FileInputStream fileInputStream = null;
-
-        try {
-            fileInputStream = new FileInputStream (file);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace ( );
-        }
-
-        if (fileInputStream != null) {
-            InputStreamReader inputStreamReader = new InputStreamReader (fileInputStream);
-            BufferedReader bufferedReader = new BufferedReader (inputStreamReader);
-
-            try {
-                lineData = bufferedReader.readLine ( );
-                while (lineData != null) {
-                    file_contents.append (lineData);
-                    lineData = bufferedReader.readLine ( );
-                }
-
-            } catch (IOException e) {
-                e.printStackTrace ( );
-            }
-        }
-        return file_contents.toString ( );
-    }
 }
