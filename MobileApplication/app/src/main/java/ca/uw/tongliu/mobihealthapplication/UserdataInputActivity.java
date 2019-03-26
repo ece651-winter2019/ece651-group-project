@@ -10,6 +10,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -153,7 +154,21 @@ public class UserdataInputActivity extends FragmentActivity {
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String result) {
-            mDataText.setText(result);
+            Context context = getApplicationContext();
+            Toast toast;
+            int duration = Toast.LENGTH_LONG;
+            CharSequence text;
+            if (result != null) {
+                text = "Data Input Succeed!";
+                toast = Toast.makeText(context, text, duration);
+                toast.show();
+            }
+            else{
+                text = "Data Input Failed!";
+                toast = Toast.makeText(context, text, duration);
+                toast.show();
+            }
+            finish();
         }
     }
 
