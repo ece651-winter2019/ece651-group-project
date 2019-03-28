@@ -36,20 +36,13 @@ public class UserDataGraphActivity extends AppCompatActivity {
 
         WebView webView = (WebView) findViewById (R.id.graphwebview);
         webView.loadUrl ("file:///android_asset/heart2.html");
-        DataPoint generated_data[] = null;
 
-        generated_data = generateData(0);
-        if ( generated_data == null ){
-            return;
-        }
+        if (createPoltInGraph(graph, 0) == false) return;
+        if (createPoltInGraph(graph, 1) == false) return;
+        if (createPoltInGraph(graph, 2) == false) return;
+/*
+        DataPoint[] generated_data;
 
-        LineGraphSeries<DataPoint> series0 = new LineGraphSeries<>(generated_data);
-        series0.setTitle("Systolic");
-        series0.setColor(Color.argb(255, 255, 0, 0));
-        series0.setDrawDataPoints(true);
-        series0.setAnimated (true);
-        series0.setThickness (10);
-        graph.addSeries(series0);
         generated_data = generateData(1);
         if ( generated_data == null ){
             return;
@@ -57,9 +50,10 @@ public class UserDataGraphActivity extends AppCompatActivity {
         LineGraphSeries<DataPoint> series1 = new LineGraphSeries<>(generated_data);
         series1.setColor(Color.argb(255, 0, 255, 0));
         series1.setTitle("Diastolic");
-        series0.setAnimated (true);
-        series0.setThickness (10);
+        series1.setAnimated (true);
+        series1.setThickness (10);
         graph.addSeries(series1);
+
         generated_data = generateData(2);
         if ( generated_data == null ){
             return;
@@ -70,12 +64,36 @@ public class UserDataGraphActivity extends AppCompatActivity {
         series2.setAnimated (true);
         series2.setThickness (10);
         graph.addSeries(series2);
+*/
+
         graph.getViewport ().setXAxisBoundsManual (true);
         graph.getViewport ().setMinX (0);
         graph.getViewport ().setMaxX (total_records);
         graph.getLegendRenderer ().setVisible (true);
         graph.getLegendRenderer ().setAlign (LegendRenderer.LegendAlign.TOP);
 
+    }
+
+    public boolean createPoltInGraph(GraphView graph, int index) {
+        DataPoint generated_data[] = null;
+        String titile[] = {"Systolic", "Diastolic","HeartRate"};
+        int Color_map[][] = {{255,0,0},{0,255,0},{0,0,255}};
+
+
+        generated_data = generateData(index);
+
+        if ( generated_data == null ){
+            return false;
+        }
+
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(generated_data);
+        series.setTitle(titile[index]);
+        series.setColor(Color.argb(255, Color_map[index][0], Color_map[index][1], Color_map[index][2]));
+        series.setDrawDataPoints(true);
+        series.setAnimated (true);
+        series.setThickness (10);
+        graph.addSeries(series);
+        return true;
     }
 
     private DataPoint[] generateData(int index) {

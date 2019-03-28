@@ -56,16 +56,29 @@ public class UserDataListActivity extends AppCompatActivity {
         user_data_listView = (ListView)findViewById(R.id.dataListView);
         DataFileHelper fileHelper = new DataFileHelper(getApplicationContext());
         String user_data = fileHelper.readDataFromLocalFile("bpData");
-        populateList(user_data);
+        list = populateList(user_data);
+        if ( list == null )
+            return;
         ListViewAdapter adapter=new ListViewAdapter(this, list);
         user_data_listView.setAdapter(adapter);
     }
 
-    private void populateList(String user_data) {
+    public ArrayList<HashMap<String, String>> populateList(String data) {
+        JSONArray jsonArray;
+        try {
+            jsonArray = new JSONArray(data);
+        } catch (JSONException e) {
+            e.printStackTrace ( );
+            return null;
+        }
+        return populateList(jsonArray);
+    }
+
+    public ArrayList<HashMap<String, String>> populateList(JSONArray jsonArray) {
         // TODO Auto-generated method stub
 
         int char_index = 0;
-        list=new ArrayList<HashMap<String,String>>();
+        ArrayList<HashMap<String,String>> new_list=new ArrayList<HashMap<String,String>>();
 
         String tmp_data = null;
         HashMap<String,String> hashmap=new HashMap<String, String>();
@@ -74,10 +87,10 @@ public class UserDataListActivity extends AppCompatActivity {
         hashmap.put(THIRD_COLUMN, "Diastolic");
         hashmap.put(FOURTH_COLUMN, "HeartRate");
         hashmap.put(FIFTH_COLUMN, "Weight");
-        list.add(hashmap);
+        new_list.add(hashmap);
+
 
         try {
-            JSONArray jsonArray = new JSONArray (user_data);
             for (int i = 0; i < jsonArray.length ( ); i++) {
                 JSONObject recordObject = jsonArray.getJSONObject (i);
                 hashmap=new HashMap<String, String>();
@@ -110,11 +123,14 @@ public class UserDataListActivity extends AppCompatActivity {
                 hashmap.put(FOURTH_COLUMN, tmp_data);
                 tmp_data = recordObject.getString ("weight");
                 hashmap.put(FIFTH_COLUMN, tmp_data);
-                list.add(hashmap);
+                new_list.add(hashmap);
             }
         } catch (JSONException e) {
             e.printStackTrace ( );
+            return null;
         }
+
+        return new_list;
 
     }
 

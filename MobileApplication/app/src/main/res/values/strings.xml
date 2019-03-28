@@ -7,6 +7,11 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_login">Login</string>
     <string name="action_exit">Exit</string>
+    <string name="menu_login">Login To Server</string>
+    <string name="menu_data_sync">Sync Data With Cloud Server</string>
+    <string name="menu_data_input">Manual Data Input</string>
+    <string name="menu_data_list">User Data List</string>
+    <string name="menu_data_graph">User Data Graph</string>
     <string name="title_activity_login">Sign in</string>
     <!-- Strings related to login -->
     <string name="title_activity_DataInput">Data Input</string>

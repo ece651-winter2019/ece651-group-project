@@ -6,20 +6,29 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import androidx.test.InstrumentationRegistry;
-import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static org.junit.Assert.*;
+import android.content.Context;
+import androidx.test.rule.ActivityTestRule;
+import androidx.test.runner.AndroidJUnit4;
+
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+
 import static org.junit.Assert.assertEquals;
 
 @RunWith(AndroidJUnit4.class)
-public class LoginActivityTest {
+public class InputUserdataActivityTest {
 
     @Rule
-    public ActivityTestRule<LoginActivity> mActivityRule = new ActivityTestRule<>(LoginActivity.class);
+    public ActivityTestRule<UserdataInputActivity> mActivityRule = new ActivityTestRule<>(UserdataInputActivity.class);
 
     @Test
     public void useAppContext() {
@@ -30,11 +39,14 @@ public class LoginActivityTest {
     }
 
     @Test
-    public void user_signup() throws InterruptedException {
-        onView(withId(R.id.username)).perform(typeText("testpatient1"));
-        onView(withId(R.id.password)).perform(typeText("genericpassword"));
-        onView(withId(R.id.sign_in_button)).perform(click());
+    public void normal_user_data_input_test() throws InterruptedException {
+        onView(withId(R.id.systolic)).perform(typeText("120"));
+        onView(withId(R.id.diastolic)).perform(typeText("75"));
+        onView(withId(R.id.Heartrate)).perform(typeText("65"));
+        onView(withId(R.id.Height)).perform(typeText("175"));
+        onView(withId(R.id.Weight)).perform(typeText("150"));
+        onView(withId(R.id.submit_button)).perform(click());
     }
 
-
 }
+
