@@ -6,6 +6,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -42,39 +43,47 @@ public class UserDataQueryActivity extends AppCompatActivity {
         mTextView = findViewById(R.id.textView2);
         mProgressView = findViewById(R.id.progressBar);
 
-        FetchUserData();
+        boolean fetch_succeed = FetchUserData();
+        if (fetch_succeed == false){
+            Intent login_intent = new Intent(this, LoginActivity.class );
+            startActivity(login_intent);
+            finish();
+        }
     }
 
     private FetchUserDataTask mFetchDataTask;
     String ret_data_string = "";
     JSONObject ret_data_obj = null;
 
-    public void FetchUserData(){            // Show a progress spinner, and kick off a background task to
+    public boolean FetchUserData(){            // Show a progress spinner, and kick off a background task to
         // perform the user login attempt.
         long oneWeek =  0;
         long oneMonth =  0;
         oneWeek = 1000 * 3600 * 24 * 7;
-        oneMonth = 1000 * 3600 * 24 * 30;
         String start_date_time = null;
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
         df.setTimeZone (TimeZone.getTimeZone("UTC"));
         Date currentTime = Calendar.getInstance().getTime ();
         String end_date_time = df.format (currentTime);
         String url_path = null;
-        start_date_time = df.format (new Date (currentTime.getTime()- oneWeek ));
+        start_date_time = df.format (new Date (currentTime.getTime()- (oneWeek * 4) ));
         showProgress(false);
-        String token = ReadDataFromLocalFile("auth_token");
         HttpComm http_comm = new HttpComm(
-                "GET"
-                ,null
+                getApplicationContext(),
+                null
         );
-//        http_comm.setUrlResource("api/patientrecords?created_on__gte=2019-03-01T00:00:00&created_on__lte=2019-03-21T18:31:00");
+        http_comm.setHttpMethod("GET");
+        String token = http_comm.readDataFromLocalFile("auth_token");
+        if ( token.equals("")){
+            return false;
+        }
         http_comm.setUrlResource("api/patientrecords");
         url_path = "?created_on__gte="+start_date_time+"&created_on__lte="+end_date_time;
         http_comm.setUrlPath (url_path);
         http_comm.setAuthToken (token);
         mFetchDataTask = new FetchUserDataTask(http_comm);
         mFetchDataTask.execute();
+        return true;
     }
 
 
@@ -120,7 +129,7 @@ public class UserDataQueryActivity extends AppCompatActivity {
             mFetchDataTask = null;
             if (ret_msg != null) {
                 //mTextView.setText (ret_msg);
-                saveDataToLocalFile (ret_msg);
+                fetch_data_http_comm.saveDataToLocalFile ("bpData",ret_msg);
             }
             finish();
             showProgress(false);
@@ -163,66 +172,6 @@ public class UserDataQueryActivity extends AppCompatActivity {
             mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
             mTextView.setVisibility(show ? View.GONE : View.VISIBLE);
         }
-    }
-
-
-    private void saveDataToLocalFile(String Data)
-    {
-        String filename = "bpData";
-        File file = new File(getFilesDir(), filename);
-
-        FileOutputStream fileOutputStream = null;
-        try {
-            fileOutputStream = new FileOutputStream (file);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace ( );
-        }
-
-        OutputStreamWriter outputStreamWriter = new OutputStreamWriter(fileOutputStream);
-
-        BufferedWriter bufferedWriter = new BufferedWriter(outputStreamWriter);
-
-        try {
-            bufferedWriter.write(Data);
-            bufferedWriter.flush ();
-            bufferedWriter.close ();
-            outputStreamWriter.close ();
-            fileOutputStream.close ();
-        } catch (IOException e) {
-            e.printStackTrace ( );
-        }
-    }
-
-    private String ReadDataFromLocalFile(String filename)
-    {
-        StringBuffer file_contents = new StringBuffer ();
-        String lineData="";
-        File file = new File(getFilesDir(), filename);
-
-        FileInputStream fileInputStream = null;
-
-        try {
-            fileInputStream = new FileInputStream(file);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace ( );
-        }
-
-        if ( fileInputStream != null){
-            InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
-            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-
-            try {
-                lineData = bufferedReader.readLine();
-                while(lineData!=null){
-                    file_contents.append (lineData);
-                    lineData = bufferedReader.readLine();
-                }
-
-            } catch (IOException e) {
-                e.printStackTrace ( );
-            }
-        }
-        return file_contents.toString ();
     }
 
 

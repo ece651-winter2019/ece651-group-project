@@ -54,17 +54,18 @@ public class UserDataListActivity extends AppCompatActivity {
         mFetchDataView = findViewById(R.id.progressView);
         mProgressView = findViewById(R.id.communication_progress);
         user_data_listView = (ListView)findViewById(R.id.dataListView);
-        populateList();
+        DataFileHelper fileHelper = new DataFileHelper(getApplicationContext());
+        String user_data = fileHelper.readDataFromLocalFile("bpData");
+        populateList(user_data);
         ListViewAdapter adapter=new ListViewAdapter(this, list);
         user_data_listView.setAdapter(adapter);
     }
 
-    private void populateList() {
+    private void populateList(String user_data) {
         // TODO Auto-generated method stub
 
         int char_index = 0;
         list=new ArrayList<HashMap<String,String>>();
-        String user_data = ReadDataFromLocalFile("bpData");
 
         String tmp_data = null;
         HashMap<String,String> hashmap=new HashMap<String, String>();
@@ -116,37 +117,5 @@ public class UserDataListActivity extends AppCompatActivity {
         }
 
     }
-    private String ReadDataFromLocalFile(String filename)
-    {
-        StringBuffer file_contents = new StringBuffer ();
-        String lineData="";
-        File file = new File(getFilesDir(), filename);
-
-        FileInputStream fileInputStream = null;
-
-        try {
-            fileInputStream = new FileInputStream(file);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace ( );
-        }
-
-        if ( fileInputStream != null){
-            InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
-            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-
-            try {
-                lineData = bufferedReader.readLine();
-                while(lineData!=null){
-                    file_contents.append (lineData);
-                    lineData = bufferedReader.readLine();
-                }
-
-            } catch (IOException e) {
-                e.printStackTrace ( );
-            }
-        }
-        return file_contents.toString ();
-    }
-
 
 }

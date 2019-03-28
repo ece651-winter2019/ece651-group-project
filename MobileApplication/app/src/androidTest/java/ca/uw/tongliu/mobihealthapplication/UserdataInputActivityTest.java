@@ -39,7 +39,7 @@ public class UserdataInputActivityTest {
     }
 
     @Test
-    public void user_data_input() throws InterruptedException {
+    public void normal_user_data_input_test() throws InterruptedException {
         onView(withId(R.id.systolic)).perform(typeText("120"));
         onView(withId(R.id.diastolic)).perform(typeText("75"));
         onView(withId(R.id.Heartrate)).perform(typeText("65"));
