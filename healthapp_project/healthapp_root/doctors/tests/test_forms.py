@@ -33,6 +33,7 @@ class Doctor_SignUp_Form_Test(TestCase):
                 "password2": "Ece651proj",
             }
         )
+        form.save() 
         print(form.errors)
         self.assertTrue(form.is_valid())
 
