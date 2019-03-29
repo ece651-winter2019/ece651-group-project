@@ -3,27 +3,29 @@
       xmlns:tools="http://schemas.android.com/tools"
       tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
+    <group
+        android:id="@+id/mobiMenu"
+        android:checkableBehavior="single">
         <item
             android:id="@+id/nav_login"
             android:icon="@drawable/ic_menu_send"
-            android:title="Login To Server"/>
+            android:title="@string/menu_login" />
         <item
             android:id="@+id/nav_data_sync"
             android:icon="@drawable/ic_menu_send"
-            android:title="Sync Data With Cloud Server"/>
+            android:title="@string/menu_data_sync" />
         <item
             android:id="@+id/nav_manual_input"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Manual Data Input"/>
+            android:title="@string/menu_data_input" />
         <item
             android:id="@+id/nav_data_list"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="User Data List"/>
+            android:title="@string/menu_data_list" />
         <item
             android:id="@+id/nav_show_graph"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="User Data Plot"/>
+            android:title="@string/menu_data_graph" />
     </group>
 
 </menu>

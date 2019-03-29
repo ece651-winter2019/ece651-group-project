@@ -3,7 +3,6 @@ package ca.uw.tongliu.mobihealthapplication;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import androidx.fragment.app.FragmentActivity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -15,14 +14,9 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.File;
-import java.io.InputStreamReader;
-import java.util.Date;
+
+import androidx.fragment.app.FragmentActivity;
 
 /**
  * A User data input screen.
