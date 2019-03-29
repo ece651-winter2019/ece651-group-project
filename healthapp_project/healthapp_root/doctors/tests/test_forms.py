@@ -55,24 +55,6 @@ class Doctor_SignUp_Form_Test(TestCase):
         )
         self.assertFalse(form.is_valid())
 
-    # Invalid Passward
-    def test_DoctorSignUpForm_invalid_pass(self):
-        form = DoctorSignUpForm(
-            data={
-                "phone_no": 23234323,
-                "street": "uni ave",
-                "city": "waterloo",
-                "state": "ON",
-                "postal_code": "N2L3G5",
-                "country": "Waterloo",
-                "license_no": 1234,
-                "practice_name": "health clinic",
-                "username": "doctor",
-                "password1": "asdf",
-                "password2": "asdf",
-            }
-        )
-        self.assertFalse(form.is_valid())
 
 
 #
