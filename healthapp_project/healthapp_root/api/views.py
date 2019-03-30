@@ -76,7 +76,7 @@ class all_patient_records(ListAPIView):
 class patient_record(APIView):
 
     # Allow for requests only if user is authenticated
-    permission_classes = (IsAuthenticated, IsPatientUser)
+    permission_classes = (IsAuthenticated, IsAdminUser)
     """
     Retrieve, update or delete a record instance.
     """
