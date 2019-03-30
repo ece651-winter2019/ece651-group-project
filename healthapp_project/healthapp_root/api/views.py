@@ -41,6 +41,10 @@ class DateTimeFilter(filters.FilterSet):
 
 
 class all_patient_records(ListAPIView):
+    """
+    List all patient records or add new record
+    """
+
     # Allow for requests only if user is authenticated
     permission_classes = (IsAuthenticated, IsPatientUser)
     serializer_class = RecordsSerializer
@@ -50,9 +54,9 @@ class all_patient_records(ListAPIView):
     filter_class = DateTimeFilter
     queryset = PatientRecord.objects.all()
 
-    """
-    List all patient records or add new record
-    """
+    def get_queryset(self):
+        user = self.request.user
+        return PatientRecord.objects.filter(user_id=user)
 
     def post(self, request, format=None):
         userid = request.user.id
