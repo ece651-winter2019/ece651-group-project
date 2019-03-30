@@ -52,7 +52,6 @@ class all_patient_records(ListAPIView):
     # Added filters to this view
     ordering_fields = "created_on"
     filter_class = DateTimeFilter
-    queryset = PatientRecord.objects.all()
 
     def get_queryset(self):
         user = self.request.user
