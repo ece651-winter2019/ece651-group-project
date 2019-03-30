@@ -1,33 +1,65 @@
-# from django.test import TestCase
-# from doctors.forms import DoctorSignUpForm
-# from users.models import CustomUser
-# from django.test import Client
-# import datetime
-# from django.utils import timezone
-# from doctors.models import Profile
+from django.test import TestCase
+from doctors.forms import *
+from users.models import *
+from django.test import Client
+import datetime
+from django.utils import timezone
+from doctors.models import *
+
+
+class Doctor_SignUp_Form_Test(TestCase):
+    #    @classmethod
+    #    def setUpTestData(cls):
+    #        # Set up non-modified objects used by all test methods
+    ##        Profile.objects.create(user_id=1, license_no=123, practice_name="health clinic")
+    #        CustomUser.objects.create(is_doctor=True)
+
+    # Valid Form Data
+    def test_DoctorSignUpForm_valid(self):
+        form = DoctorSignUpForm(
+            data={
+                "first_name": "ammar",
+                "last_name": "ahmed",
+                "phone_no": 23234323,
+                "street": "uni ave",
+                "city": "waterloo",
+                "state": "ON",
+                "postal_code": "N2L3G5",
+                "country": "Waterloo",
+                "license_no": 1234,
+                "practice_name": "health clinic",
+                "username": "doctor",
+                "password1": "Ece651proj",
+                "password2": "Ece651proj",
+            }
+        )
+        form.save() 
+        print(form.errors)
+        self.assertTrue(form.is_valid())
+
+    # Invalid Form Data
+    def test_DoctorSignUpForm_invalid(self):
+        form = DoctorSignUpForm(
+            data={
+                "phone_no": 23234323,
+                "street": "uni ave",
+                "city": "waterloo",
+                "state": "ON",
+                "postal_code": "N2L3G5",
+                "country": "Waterloo",
+                "license_no": 1234,
+                "practice_name": "health clinic",
+                "username": "doctor",
+                "password1": "Ece651proj",
+                "password2": "Ece651proj",
+            }
+        )
+        self.assertFalse(form.is_valid())
+
+
+
 #
-#
-#
-# class Setup_Class(TestCase):
-#    def setUp(self):
-#        self.user = CustomUser.objects.create(license_no=123, practice_name="health clinic")
-#
-# class Doctor_SignUp_Form_Test(TestCase):
-#
-#    # Valid Form Data
-#    def test_DoctorSignUpForm_valid(self):
-#        form = DoctorSignUpForm(data={'user': "12",'license_no': "123", 'practice_name': "health clinic"})
-#        self.assertTrue(form.is_valid())
-#
-#    # Invalid Form Data
-#    def test_DoctorSignUpForm_invalid(self):
-#        form = DoctorSignUpForm(data={'email': "", 'password': "mp", 'first_name': "mp", 'phone': ""})
-#        self.assertFalse(form.is_valid())
-#
-#
-#
-#
-#
+
 ##    # Set up non-modified objects used by all test methods
 ##    def setUpTestData(cls):
 ##        Profile.objects.create(user_id = 1,license_no=123, practice_name="health clinic")
