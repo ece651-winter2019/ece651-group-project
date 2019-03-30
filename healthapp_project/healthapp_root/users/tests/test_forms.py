@@ -13,47 +13,46 @@ class Custom_User_Creation_Form_Test(TestCase):
     #        # Set up non-modified objects used by all test methods
     ##        Profile.objects.create(user_id=1, license_no=123, practice_name="health clinic")
     #        CustomUser.objects.create(is_doctor=True)
-    
+
     # Valid Form Data
     def test_CustomUserCreationForm_valid(self):
         form = CustomUserCreationForm(
-                                data={
-                                "first_name": "ammar",
-                                "last_name": "ahmed",
-                                "phone_no": 23234323,
-                                "street": "uni ave",
-                                "city": "waterloo",
-                                "state": "ON",
-                                "postal_code": "N2L3G5",
-                                "country": "Waterloo",
-                                "username": "customuser",
-                                "password1": "ECE651Proj",
-                                "password2": "ECE651Proj"
-                                }
-                                )
-#                                form.save()
+            data={
+                "first_name": "ammar",
+                "last_name": "ahmed",
+                "phone_no": 23234323,
+                "street": "uni ave",
+                "city": "waterloo",
+                "state": "ON",
+                "postal_code": "N2L3G5",
+                "country": "Waterloo",
+                "username": "customuser",
+                "password1": "ECE651Proj",
+                "password2": "ECE651Proj",
+            }
+        )
+        #                                form.save()
         print(form.errors)
         self.assertTrue(form.is_valid())
 
-# Invalid Form Data
+    # Invalid Form Data
     def test_DoctorSignUpForm_invalid(self):
         form = DoctorSignUpForm(
-                            data={
-                            "phone_no": 23234323,
-                            "street": "uni ave",
-                            "city": "waterloo",
-                            "state": "ON",
-                            "postal_code": "N2L3G5",
-                            "country": "Waterloo",
-                            "license_no": 1234,
-                            "practice_name": "health clinic",
-                            "username": "doctor",
-                            "password1": "Ece651proj",
-                            "password2": "Ece651proj",
-                            }
-                            )
+            data={
+                "phone_no": 23234323,
+                "street": "uni ave",
+                "city": "waterloo",
+                "state": "ON",
+                "postal_code": "N2L3G5",
+                "country": "Waterloo",
+                "license_no": 1234,
+                "practice_name": "health clinic",
+                "username": "doctor",
+                "password1": "Ece651proj",
+                "password2": "Ece651proj",
+            }
+        )
         self.assertFalse(form.is_valid())
-
 
 
 #
