@@ -1,5 +1,5 @@
 from django.test import TestCase
-from doctors.forms import *
+from docotrs.forms import DoctorSignUpForm
 from users.models import *
 from django.test import Client
 import datetime
@@ -33,6 +33,7 @@ class Doctor_SignUp_Form_Test(TestCase):
                 "password2": "Ece651proj",
             }
         )
+        form.save()
         print(form.errors)
         self.assertTrue(form.is_valid())
 
@@ -54,7 +55,6 @@ class Doctor_SignUp_Form_Test(TestCase):
             }
         )
         self.assertFalse(form.is_valid())
-
 
 
 #
