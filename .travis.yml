@@ -44,6 +44,6 @@ matrix:
       # command to run tests
       before_script: cd healthapp_root
       script:
-        - pytest --cov
+        - pytest --cov -p no:warnings
 
 
