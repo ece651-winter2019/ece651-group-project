@@ -1,5 +1,5 @@
 from django.test import TestCase
-from doctors.forms import *
+from doctors.forms import DoctorSignUpForm
 from users.models import *
 from django.test import Client
 import datetime

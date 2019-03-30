@@ -1,3 +1,8 @@
 [run]
 source =
     .
+omit =
+    healthapp_site/settings.py
+    healthapp_site/wsgi.py
+    manage.py
+
