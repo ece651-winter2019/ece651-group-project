@@ -1,51 +1,45 @@
-[    
+[
     {
         "bp_diastolic": 70,
         "bp_systolic": 165,
-        "created_on": 1456,
         "heart_rate": 60,
-        "patient_id": 12,
-        "weight": 180
+        "weight": 180,
+        "height": "180"
     },
     {
         "bp_diastolic": 123,
         "bp_systolic": 100,
-        "created_on": 1457,
         "heart_rate": 66,
-        "patient_id": 12,
-        "weight": 180
+        "weight": 180,
+        "height": "180"
     },
     {
         "bp_diastolic": 70,
         "bp_systolic": 1200,
-        "created_on": 1456,
         "heart_rate": 60,
-        "patient_id": 12,
-        "weight": 180
+        "weight": 180,
+        "height": "180"
     },
     {
         "bp_diastolic": 800,
         "bp_systolic": 1200,
-        "created_on": 1456,
         "heart_rate": 60,
-        "patient_id": 12,
-        "weight": 180
+        "weight": 180,
+        "height": "180"
     },
     {
         "bp_diastolic": 800,
         "bp_systolic": 1200,
-        "created_on": 1456,
         "heart_rate": 60,
-        "patient_id": 12,
-        "weight": 180
+        "weight": 180,
+        "height": "180"
     },
     {
         "bp_diastolic": 800,
         "bp_systolic": 1200,
-        "created_on": 1456,
         "heart_rate": 60,
-        "patient_id": 12,
-        "weight": 180
+        "weight": 180,
+        "height": "180"
     }
 
 ]
