@@ -8,9 +8,7 @@ from .models import Profile
 
 
 class PatientSignUpForm(CustomUserCreationForm):
-    doctor_id = forms.ModelChoiceField(
-        queryset=CustomUser.objects.filter(is_doctor=True)
-    )
+    doctor = forms.ModelChoiceField(queryset=CustomUser.objects.filter(is_doctor=True))
     dob = forms.CharField(max_length=10, required=True)
     sex = forms.CharField(max_length=10, required=True)
     contact_firstname = forms.CharField(max_length=20, required=True)
@@ -28,7 +26,7 @@ class PatientSignUpForm(CustomUserCreationForm):
         user.is_doctor = False
         user.save()
 
-        doctor = DocProfile.objects.get(user=self.cleaned_data["doctor_id"])
+        doctor = DocProfile.objects.get(user=self.cleaned_data["doctor"])
         patient_profile = Profile(
             user=user,
             doctor=doctor,
