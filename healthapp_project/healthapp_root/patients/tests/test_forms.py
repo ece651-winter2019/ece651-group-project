@@ -9,14 +9,17 @@ from doctors.models import Profile as DocProfile
 
 
 class Patient_SignUp_Form_Test(TestCase):
-    #    @classmethod
-    #    def setUpTestData(cls):
-    #        # Set up non-modified objects used by all test methods
-    ##        Profile.objects.create(user_id=1, license_no=123, practice_name="health clinic")
-    #        CustomUser.objects.create(is_doctor=True)
+    @classmethod
+    def setUpTestData(cls):
+        # Set up non-modified objects used by all test methods
+        DocProfile.objects.create(
+            user_id=1, license_no=123, practice_name="health clinic"
+        )
+        CustomUser.objects.create(is_doctor=True)
 
     # Valid Form Data
     def test_PatientSignUpForm_valid(self):
+        print(DocProfile.objects.first().pk)
         form = PatientSignUpForm(
             data={
                 "doctor": DocProfile.objects.first().pk,
