@@ -14,3 +14,6 @@ class Profile(models.Model):
     )
     license_no = models.CharField(max_length=20, null=False)
     practice_name = models.CharField(max_length=20, null=False)
+
+    def __str__(self):
+        return str(self.user)
