@@ -16,4 +16,7 @@ class CustomUser(AbstractUser):
     country = models.CharField(max_length=20, null=False)
 
     def __str__(self):
-        return self.first_name + " " + self.last_name
+        if self.is_doctor:
+            return "Dr. " + self.last_name
+        else:
+            return self.first_name + " " + self.last_name
