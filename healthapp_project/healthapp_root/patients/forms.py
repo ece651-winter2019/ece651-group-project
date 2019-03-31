@@ -8,12 +8,9 @@ from .models import Profile
 
 
 class PatientSignUpForm(CustomUserCreationForm):
-    # interests = forms.ModelMultipleChoiceField(
-    #     queryset=Subject.objects.all(),
-    #     widget=forms.CheckboxSelectMultiple,
-    #     required=True
-    # )
-    doctor_id = forms.IntegerField(required=True)
+    doctor_id = forms.ModelChoiceField(
+        queryset=CustomUser.objects.filter(is_doctor=True)
+    )
     dob = forms.CharField(max_length=10, required=True)
     sex = forms.CharField(max_length=10, required=True)
     contact_firstname = forms.CharField(max_length=20, required=True)
